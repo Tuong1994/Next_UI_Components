@@ -1,0 +1,39 @@
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  row-gap: $w-1;
+  margin-bottom: $m-1 + 0.5;
+  .breadcrumb-item {
+    margin-right: $m-1;
+    display: flex;
+    align-items: center;
+    &:last-child {
+      margin-right: 0;
+    }
+    .item-label {
+      font-size: $text-xs;
+      color: $text-gray;
+      cursor: pointer;
+      transition: all $transition-time-md $transition-fn;
+      * {
+        font-size: $text-xs;
+        color: $text-gray;
+      }
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+    .item-separator {
+      margin-left: $m-1;
+      font-size: $text-xs;
+      color: $text-gray;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      * {
+        color: $text-gray;
+      }
+    }
+  }
+}

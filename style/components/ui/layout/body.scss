@@ -1,0 +1,5 @@
+.body {
+  height: calc($h-screen - $h-6);
+  display: flex;
+  position: relative;
+}

@@ -1,0 +1,15 @@
+.content {
+  width: $w-full;
+  transition: all $transition-time-md $transition-fn;
+}
+
+.content-layout {
+  width: calc($w-full - $w-10 * 2.5);
+  margin-left: $w-10 * 2.5;
+  margin-top: $m-5 + 1;
+}
+
+.content-shrinked {
+  width: calc($w-full - $w-6);
+  margin-left: $w-6;
+}

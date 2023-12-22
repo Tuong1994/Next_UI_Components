@@ -1,0 +1,191 @@
+// Title
+.title {
+  margin-bottom: $m-2;
+  * {
+    margin: 0;
+  }
+}
+
+.title-left {
+  text-align: left;
+}
+
+.title-center {
+  text-align: center;
+}
+
+.title-right {
+  text-align: right;
+}
+
+.title-justify {
+  text-align: justify;
+}
+
+.title-underline {
+  text-decoration: underline;
+  * {
+    text-decoration: underline;
+  }
+}
+
+.title-remove {
+  text-decoration: line-through;
+  * {
+    text-decoration: line-through;
+  }
+}
+
+.title-italic {
+  font-style: italic;
+  * {
+    font-style: italic;
+  }
+}
+
+.title-default {
+  color: $text-black;
+  * {
+    color: $text-black;
+  }
+}
+
+.title-secondary {
+  color: $text-gray;
+  * {
+    color: $text-gray;
+  }
+}
+
+.title-success {
+  color: $text-green;
+  * {
+    color: $text-green;
+  }
+}
+
+.title-warning {
+  color: $text-orange;
+  * {
+    color: $text-orange;
+  }
+}
+
+.title-danger {
+  color: $text-red;
+  * {
+    color: $text-red;
+  }
+}
+
+.title-1 {
+  font-size: $text-xxl;
+}
+
+.title-2 {
+  font-size: $text-4xl;
+}
+
+.title-3 {
+  font-size: $text-3xl;
+}
+
+.title-4 {
+  font-size: $text-2xl;
+}
+
+.title-5 {
+  font-size: $text-xl;
+}
+
+.title-6 {
+  font-size: $text-lg;
+}
+
+// Paragraphy
+.paragraphy {
+  line-height: $h-1 * 2;
+  * {
+    margin: 0;
+    line-height: $h-1 * 2;
+  }
+}
+
+.paragraphy-left {
+  text-align: left;
+}
+
+.paragraphy-center {
+  text-align: center;
+}
+
+.paragraphy-right {
+  text-align: right;
+}
+
+.paragraphy-justify {
+  text-align: justify;
+}
+
+.paragraphy-underline {
+  text-decoration: underline;
+  * {
+    text-decoration: underline;
+  }
+}
+
+.paragraphy-remove {
+  text-decoration: line-through;
+  * {
+    text-decoration: line-through;
+  }
+}
+
+.paragraphy-italic {
+  font-style: italic;
+  * {
+    font-style: italic;
+  }
+}
+
+.paragraphy-strong {
+  font-weight: $font-semibold;
+  * {
+    font-weight: $font-semibold;
+  }
+}
+
+.paragraphy-default {
+  color: $text-black;
+  * {
+    color: $text-black;
+  }
+}
+
+.paragraphy-secondary {
+  color: $text-gray;
+  * {
+    color: $text-gray;
+  }
+}
+
+.paragraphy-success {
+  color: $text-green;
+  * {
+    color: $text-green;
+  }
+}
+
+.paragraphy-warning {
+  color: $text-orange;
+  * {
+    color: $text-orange;
+  }
+}
+
+.paragraphy-danger {
+  color: $text-red;
+  * {
+    color: $text-red;
+  }
+}

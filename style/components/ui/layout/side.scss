@@ -1,0 +1,55 @@
+.side {
+  width: $w-10 * 2.5;
+  height: $h-screen;
+  border-right: 0.5px solid transparent;
+  position: relative;
+  z-index: 10;
+  transition: all $transition-time-md $transition-fn;
+  .side-content {
+    height: calc($h-full - $h-6);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .side-action {
+    height: $h-6;
+    padding: $p-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .action-btn {
+      width: $w-full;
+      svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.side-shrinked {
+  width: $w-6;
+  .side-content {
+    overflow: unset;
+  }
+}
+
+.side-layout {
+  height: calc($h-screen - $h-6);
+  position: fixed;
+  top: 60px;
+}
+
+.side-light {
+  background: $bg-white;
+  border-color: $bg-gray;
+}
+
+.side-dark {
+  background: $bg-deep-blue;
+  border-color: $bg-deep-blue;
+  color: $text-white;
+  * {
+    color: $text-white;
+  }
+}

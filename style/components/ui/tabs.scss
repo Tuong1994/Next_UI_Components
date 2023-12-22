@@ -1,0 +1,223 @@
+.tabs {
+  width: $w-full;
+  .tabs-head {
+    width: $w-full;
+    margin-bottom: $m-2;
+    display: flex;
+    align-items: flex-end;
+    overflow-x: auto;
+    .head-item {
+      min-width: max-content;
+      height: $h-4;
+      padding: $p-1 - 0.4 $p-1;
+      background: $bg-slate;
+      border-bottom: 1px solid $bg-slate;
+      transition: all $transition-time-md $transition-fn;
+      cursor: pointer;
+      position: relative;
+      &:last-child .item-inner,
+      &:hover .item-inner {
+        &::after {
+          content: unset;
+        }
+      }
+      .item-inner {
+        width: calc($w-full - 10px);
+        height: $h-3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $rounded-lg;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all $transition-time-xs $transition-fn;
+        &::after {
+          content: "";
+          width: 2px;
+          height: $h-full;
+          background: $bg-gray;
+          position: absolute;
+          top: 0;
+          right: 0;
+          z-index: 1;
+        }
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        top: 1rem;
+        transform: translate(-50%, 0);
+        border-bottom-left-radius: unset;
+        border-bottom-right-radius: unset;
+        background: $bg-white;
+        box-shadow: 0 0 5px $bg-gray;
+        &::after {
+          content: unset;
+        }
+      }
+    }
+  }
+  .tabs-content {
+    position: relative;
+    .content-item {
+      width: $w-full;
+      background: $bg-white;
+      position: absolute;
+      opacity: 0;
+      display: none;
+      transition: all $transition-time-md $transition-fn;
+    }
+    .content-item-active {
+      display: block;
+      opacity: 1;
+      animation: fade $transition-time-md $transition-fn;
+    }
+  }
+}
+
+// Color
+.tabs-blue {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-blue-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-blue;
+        * {
+          color: $text-blue;
+        }
+      }
+    }
+  }
+}
+
+.tabs-red {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-red-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-red;
+        * {
+          color: $text-red;
+        }
+      }
+    }
+  }
+}
+
+.tabs-green {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-green-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-green;
+        * {
+          color: $text-green;
+        }
+      }
+    }
+  }
+}
+
+.tabs-orange {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-orange-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-orange;
+        * {
+          color: $text-orange;
+        }
+      }
+    }
+  }
+}
+
+.tabs-yellow {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-yellow-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-yellow;
+        * {
+          color: $text-yellow;
+        }
+      }
+    }
+  }
+}
+
+.tabs-orange {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-orange-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-orange;
+        * {
+          color: $text-orange;
+        }
+      }
+    }
+  }
+}
+
+.tabs-purple {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-purple-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-purple;
+        * {
+          color: $text-purple;
+        }
+      }
+    }
+  }
+}
+
+.tabs-pink {
+  .tabs-head {
+    .head-item {
+      &:hover .item-inner {
+        background: $bg-pink-rgba-xs;
+      }
+    }
+    .head-item-active {
+      .item-inner {
+        color: $text-pink;
+        * {
+          color: $text-pink;
+        }
+      }
+    }
+  }
+}
