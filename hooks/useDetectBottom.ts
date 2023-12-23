@@ -3,7 +3,7 @@
 import React from "react";
 
 const useDetectBottom = (ref: React.RefObject<HTMLElement>, distance = 250) => {
-  if(typeof window === 'undefined') return
+  if(typeof window === 'undefined') return false
 
   const [bottom, setBottom] = React.useState<boolean>(false);
 
