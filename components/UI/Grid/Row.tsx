@@ -18,7 +18,7 @@ const GridRow: React.ForwardRefRenderFunction<HTMLDivElement, GridRowProps> = (
 ) => {
   const justifyClassName = `grid-row-${justify}`;
 
-  const alignClassName = `grid-col-${align}`;
+  const alignClassName = `grid-row-${align}`;
 
   const inlineStyle = () => {
     if (!gutters.length) return { ...style, gap: "10px" };
