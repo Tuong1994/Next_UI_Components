@@ -6,7 +6,7 @@ import ImageView from "./View";
 import ImageLoading from "./Loading";
 import DefaultImage from "@/assets/default-image.jpg";
 
-type ImageSize = ComponentSize | number | any;
+type ImageSize = ComponentSize;
 
 type ImageObjectFit = "fill" | "cover" | "contain" | "none";
 
@@ -15,6 +15,8 @@ type ImageLazyType = "immediate" | "lazy";
 export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   rootClassName?: string;
   rootStyle?: React.CSSProperties;
+  imgWidth?: number | string;
+  imgHeight?: number | string;
   size?: ImageSize;
   objectFit?: ImageObjectFit;
   lazyType?: ImageLazyType;
@@ -29,7 +31,9 @@ const Image: React.ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
   {
     rootClassName = "",
     rootStyle,
-    size = "auto",
+    imgWidth,
+    imgHeight,
+    size,
     objectFit = "fill",
     lazyType = "lazy",
     src = DefaultImage,
@@ -65,11 +69,15 @@ const Image: React.ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
   }, [src]);
 
   const imageSize = (): React.CSSProperties => {
-    if (typeof size === "number") return { width: `${size}px`, height: `${size}px` };
-    if (size === "sm") return { width: `100px`, height: `100px` };
-    if (size === "md") return { width: `200px`, height: `200px` };
-    if (size === "lg") return { width: `300px`, height: `300px` };
-    return { width: size, height: size };
+    if (size) {
+      if (size === "sm") return { width: `100px`, height: `100px` };
+      if (size === "md") return { width: `200px`, height: `200px` };
+      if (size === "lg") return { width: `300px`, height: `300px` };
+    }
+    if (imgWidth && !imgHeight) return { width: imgWidth, height: "auto" };
+    if (imgHeight && !imgWidth) return { width: "auto", height: imgHeight };
+    if (imgWidth && imgHeight) return { width: imgWidth, height: imgHeight };
+    return { width: "auto", height: "auto" };
   };
 
   const handleImageLoaded = () => setLoading(false);

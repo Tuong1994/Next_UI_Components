@@ -2,12 +2,12 @@
 
 import React from "react";
 import { ColSpan } from "./type";
-import GridContext from "./Context";
-import useViewpoint from "@/hooks/useViewpoint";
+import { GridAppContext, GridRowContext } from "./Context";
 
 export interface GridColProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
   children?: React.ReactNode | React.ReactNode[];
+  isFill?: boolean;
   span?: ColSpan;
   xs?: ColSpan;
   md?: ColSpan;
@@ -15,16 +15,18 @@ export interface GridColProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const GridCol: React.ForwardRefRenderFunction<HTMLDivElement, GridColProps> = (
-  { rootClassName = "", style, children, span, xs, md, lg, ...restProps },
+  { rootClassName = "", style, children, span, xs, md, lg, isFill, ...restProps },
   ref
 ) => {
-  const { gutters } = React.useContext(GridContext);
+  const { isPhone, isTablet, isLaptop, isDesktop } = React.useContext(GridAppContext);
 
-  const { isPhone, isTablet, isLaptop, isDesktop } = useViewpoint();
+  const { gutters } = React.useContext(GridRowContext);
 
   const [hide, setHide] = React.useState<boolean>(false);
 
   const [width, setWidth] = React.useState<string>("auto");
+
+  const fillClassName = isFill ? "grid-col-fill" : "";
 
   const gapSize = !gutters.length ? 10 : gutters[0];
 
@@ -64,7 +66,12 @@ const GridCol: React.ForwardRefRenderFunction<HTMLDivElement, GridColProps> = (
   }, [span, xs, md, lg, isPhone, isTablet, isLaptop, isDesktop]);
 
   return !hide ? (
-    <div {...restProps} ref={ref} style={inlineStyle} className={`grid-col ${rootClassName}`}>
+    <div
+      {...restProps}
+      ref={ref}
+      style={inlineStyle}
+      className={`grid-col ${fillClassName} ${rootClassName}`}
+    >
       {children}
     </div>
   ) : null;

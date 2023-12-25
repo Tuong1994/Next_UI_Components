@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 
 const useRender = (trigger: boolean, time = 300) => {

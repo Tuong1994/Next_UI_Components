@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 const useViewpoint = () => {
@@ -12,15 +10,15 @@ const useViewpoint = () => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  });
+  }, []);
 
-  const isPhone = React.useMemo(() => screenWidth >= 320 && screenWidth <= 480, [screenWidth]);
+  const isPhone = screenWidth >= 320 && screenWidth <= 480;
 
-  const isTablet = React.useMemo(() => screenWidth > 480 && screenWidth <= 768, [screenWidth]);
+  const isTablet = screenWidth > 480 && screenWidth <= 768;
 
-  const isLaptop = React.useMemo(() => screenWidth > 768 && screenWidth <= 1100, [screenWidth]);
+  const isLaptop = screenWidth > 768 && screenWidth <= 1100;
 
-  const isDesktop = React.useMemo(() => screenWidth > 1100, [screenWidth]);
+  const isDesktop = screenWidth > 1100;
 
   return { screenWidth, isPhone, isTablet, isLaptop, isDesktop };
 };

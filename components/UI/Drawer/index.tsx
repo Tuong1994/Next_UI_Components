@@ -13,6 +13,7 @@ export interface DrawerProps {
   headStyle?: React.CSSProperties;
   bodyStyle?: React.CSSProperties;
   open?: boolean;
+  hasHead?: boolean;
   head?: React.ReactNode | React.ReactNode[];
   children?: React.ReactNode | React.ReactNode[];
   onClose?: () => void;
@@ -29,6 +30,7 @@ const Drawer: React.ForwardRefRenderFunction<HTMLDivElement, DrawerProps> = (
     head = "Drawer",
     children,
     open = false,
+    hasHead = true,
     onClose,
   },
   ref
@@ -46,10 +48,12 @@ const Drawer: React.ForwardRefRenderFunction<HTMLDivElement, DrawerProps> = (
           <div className={`drawer-backdrop ${backdropActiveClassName}`} onClick={onClose} />
 
           <div ref={ref} style={style} className={`drawer ${drawerActiveClassName} ${rootClassName}`}>
-            <div style={headStyle} className={`drawer-head ${headClassName}`}>
-              {head}
-              <HiXMark size={18} className="head-icon" onClick={onClose} />
-            </div>
+            {hasHead && (
+              <div style={headStyle} className={`drawer-head ${headClassName}`}>
+                {head}
+                <HiXMark size={18} className="head-icon" onClick={onClose} />
+              </div>
+            )}
             <div style={bodyStyle} className={`drawer-body ${bodyClassName}`}>
               {children}
             </div>

@@ -4,6 +4,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { BsTrash } from "react-icons/bs";
 import { CheckBox } from "@/components/Control";
 import ImageViewPopup from "./ViewPopup";
+import Image from "next/image";
 
 type ViewImage = {
   url: string;
@@ -17,7 +18,7 @@ interface ImageViewProps extends ImageProps {
 }
 
 const ImageView: React.ForwardRefRenderFunction<HTMLImageElement, ImageViewProps> = (
-  { imageSize, src = "", checked, hasView, hasRemove, hasCheck, onRemove, handleCheck, ...restProps },
+  { imageSize, src = "", alt = "image", checked, hasView, hasRemove, hasCheck, onRemove, handleCheck, ...restProps },
   ref
 ) => {
   const [popup, setPopup] = React.useState<ViewImage>({ url: "", open: false });
@@ -28,7 +29,18 @@ const ImageView: React.ForwardRefRenderFunction<HTMLImageElement, ImageViewProps
 
   return (
     <div style={imageSize()} className="image-group">
-      <img ref={ref} {...restProps} src={src} className={`group-view ${viewCheckedClassName}`} />
+      <Image
+        ref={ref}
+        {...restProps}
+        src={src}
+        width={0}
+        height={0}
+        alt={alt}
+        priority
+        unoptimized
+        style={imageSize()}
+        className={`group-view ${viewCheckedClassName}`}
+      />
 
       {hasView && (
         <div className="group-actions">

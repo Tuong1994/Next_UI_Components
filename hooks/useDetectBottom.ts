@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 
 const useDetectBottom = (ref: React.RefObject<HTMLElement>, distance = 250) => {

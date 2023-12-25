@@ -50,3 +50,7 @@
 .grid-col {
   flex-shrink: 0;
 }
+
+.grid-col-fill {
+  flex-grow: 1;
+}
