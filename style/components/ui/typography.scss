@@ -102,8 +102,8 @@
   font-size: $text-lg;
 }
 
-// Paragraphy
-.paragraphy {
+// paragraph
+.paragraph {
   line-height: $h-1 * 2;
   * {
     margin: 0;
@@ -111,79 +111,79 @@
   }
 }
 
-.paragraphy-left {
+.paragraph-left {
   text-align: left;
 }
 
-.paragraphy-center {
+.paragraph-center {
   text-align: center;
 }
 
-.paragraphy-right {
+.paragraph-right {
   text-align: right;
 }
 
-.paragraphy-justify {
+.paragraph-justify {
   text-align: justify;
 }
 
-.paragraphy-underline {
+.paragraph-underline {
   text-decoration: underline;
   * {
     text-decoration: underline;
   }
 }
 
-.paragraphy-remove {
+.paragraph-remove {
   text-decoration: line-through;
   * {
     text-decoration: line-through;
   }
 }
 
-.paragraphy-italic {
+.paragraph-italic {
   font-style: italic;
   * {
     font-style: italic;
   }
 }
 
-.paragraphy-strong {
+.paragraph-strong {
   font-weight: $font-semibold;
   * {
     font-weight: $font-semibold;
   }
 }
 
-.paragraphy-default {
+.paragraph-default {
   color: $text-black;
   * {
     color: $text-black;
   }
 }
 
-.paragraphy-secondary {
+.paragraph-secondary {
   color: $text-gray;
   * {
     color: $text-gray;
   }
 }
 
-.paragraphy-success {
+.paragraph-success {
   color: $text-green;
   * {
     color: $text-green;
   }
 }
 
-.paragraphy-warning {
+.paragraph-warning {
   color: $text-orange;
   * {
     color: $text-orange;
   }
 }
 
-.paragraphy-danger {
+.paragraph-danger {
   color: $text-red;
   * {
     color: $text-red;

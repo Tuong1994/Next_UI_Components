@@ -3,51 +3,42 @@
   .tabs-head {
     width: $w-full;
     margin-bottom: $m-2;
+    background: $bg-slate;
+    border-top-left-radius: $rounded;
+    border-top-right-radius: $rounded;
     display: flex;
     align-items: flex-end;
     overflow-x: auto;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
     .head-item {
       min-width: max-content;
+      width: $w-10;
       height: $h-4;
-      padding: $p-1 - 0.4 $p-1;
-      background: $bg-slate;
+      padding: $p-1 - 0.4;
       border-bottom: 1px solid $bg-slate;
       transition: all $transition-time-md $transition-fn;
       cursor: pointer;
-      position: relative;
-      &:last-child .item-inner,
-      &:hover .item-inner {
-        &::after {
-          content: unset;
-        }
-      }
       .item-inner {
-        width: calc($w-full - 10px);
         height: $h-3;
+        padding: $p-1 - 0.4 $p-1;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: $rounded-lg;
-        position: absolute;
+        position: relative;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         transition: all $transition-time-xs $transition-fn;
-        &::after {
-          content: "";
-          width: 2px;
-          height: $h-full;
-          background: $bg-gray;
-          position: absolute;
-          top: 0;
-          right: 0;
-          z-index: 1;
-        }
       }
     }
     .head-item-active {
       .item-inner {
-        top: 1rem;
+        top: 0.4rem;
         transform: translate(-50%, 0);
         border-bottom-left-radius: unset;
         border-bottom-right-radius: unset;
@@ -60,17 +51,17 @@
     }
   }
   .tabs-content {
+    width: $w-full;
+    overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     .content-item {
       width: $w-full;
       background: $bg-white;
-      position: absolute;
       opacity: 0;
-      display: none;
       transition: all $transition-time-md $transition-fn;
     }
     .content-item-active {
-      display: block;
       opacity: 1;
       animation: fade $transition-time-md $transition-fn;
     }
@@ -92,6 +83,9 @@
           color: $text-blue;
         }
       }
+      &:hover .item-inner {
+        background: $bg-white;
+      }
     }
   }
 }
@@ -109,6 +103,9 @@
         * {
           color: $text-red;
         }
+      }
+      &:hover .item-inner {
+        background: $bg-white;
       }
     }
   }
@@ -128,6 +125,9 @@
           color: $text-green;
         }
       }
+      &:hover .item-inner {
+        background: $bg-white;
+      }
     }
   }
 }
@@ -145,6 +145,9 @@
         * {
           color: $text-orange;
         }
+      }
+      &:hover .item-inner {
+        background: $bg-white;
       }
     }
   }
@@ -164,6 +167,9 @@
           color: $text-yellow;
         }
       }
+      &:hover .item-inner {
+        background: $bg-white;
+      }
     }
   }
 }
@@ -181,6 +187,9 @@
         * {
           color: $text-orange;
         }
+      }
+      &:hover .item-inner {
+        background: $bg-white;
       }
     }
   }
@@ -200,6 +209,9 @@
           color: $text-purple;
         }
       }
+      &:hover .item-inner {
+        background: $bg-white;
+      }
     }
   }
 }
@@ -217,6 +229,9 @@
         * {
           color: $text-pink;
         }
+      }
+      &:hover .item-inner {
+        background: $bg-white;
       }
     }
   }

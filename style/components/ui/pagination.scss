@@ -149,6 +149,9 @@
 .pagination-ghost {
   .pagination-actions {
     background: transparent;
+    .actions-content {
+      color: $text-black;
+    }
     .actions-button,
     .actions-dot {
       color: $text-black;

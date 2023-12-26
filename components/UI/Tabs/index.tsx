@@ -34,22 +34,18 @@ const Tabs: React.ForwardRefRenderFunction<HTMLDivElement, TabsProps> = (
   const colorClassName = `tabs-${color}`;
 
   const renderTitles = () => {
-    const itemStyle: React.CSSProperties = { width: `calc(100% / ${items.length})` };
-
     return items.map((item) => {
       const tabActiveClassName = tabActive === item.id ? "head-item-active" : "";
-
-      const commonProps = { item, itemStyle, tabActiveClassName, setTabActive };
-
+      const commonProps = { item, tabActiveClassName, setTabActive };
       return <TabsHead key={item.id} {...commonProps} />;
     });
   };
 
   const renderContents = () => {
     return items.map((item) => {
-      const tabActiveClassName = tabActive === item.id ? "content-item-active" : "";
-
-      if (tabActive === item.id) {
+      const actived = tabActive === item.id;
+      const tabActiveClassName = actived ? "content-item-active" : "";
+      if (actived) {
         return (
           <div key={item.id} className={`content-item ${tabActiveClassName}`}>
             {item.content}

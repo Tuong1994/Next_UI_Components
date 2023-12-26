@@ -1,4 +1,4 @@
 import Title from "./Title";
-import Paragraphy from "./Paragraphy";
+import Paragraph from "./Paragraph";
 
-export { Title, Paragraphy };
+export { Title, Paragraph };

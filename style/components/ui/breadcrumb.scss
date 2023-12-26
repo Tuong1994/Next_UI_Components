@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   align-items: center;
   row-gap: $w-1;
-  margin-bottom: $m-1 + 0.5;
+  padding: $p-2 0;
   .breadcrumb-item {
     margin-right: $m-1;
     display: flex;
@@ -14,14 +14,23 @@
     .item-label {
       font-size: $text-xs;
       color: $text-gray;
-      cursor: pointer;
-      transition: all $transition-time-md $transition-fn;
+      transition: all $transition-time-sm $transition-fn;
       * {
         font-size: $text-xs;
         color: $text-gray;
+        transition: all $transition-time-sm $transition-fn;
       }
       &:hover {
-        opacity: 0.6;
+        color: $text-black;
+        * {
+          color: $text-black;
+        }
+      }
+    }
+    .item-label-active {
+      color: $text-black;
+      * {
+        color: $text-black;
       }
     }
     .item-separator {
