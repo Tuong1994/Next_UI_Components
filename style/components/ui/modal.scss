@@ -30,9 +30,11 @@
   .modal-body,
   .modal-foot {
     padding: $p-2;
+    @include respond(mdPhone) {
+      padding: $p-2 $p-1;
+    }
   }
   .modal-head {
-    background: $bg-blue;
     color: $text-white;
     display: flex;
     align-items: center;
@@ -70,6 +72,7 @@
   animation: fadeInTop $transition-time-md $transition-fn;
 }
 
+// Size
 .modal-sm {
   width: $w-10 * 4;
   @include respond(mdTablet) {
@@ -115,5 +118,74 @@
   }
   @include respond(smPhone) {
     width: $w-10 * 3;
+  }
+}
+
+// Color
+.modal-blue {
+  .modal-head {
+    background: $bg-blue;
+  }
+}
+
+.modal-red {
+  .modal-head {
+    background: $bg-red;
+  }
+}
+
+.modal-green {
+  .modal-head {
+    background: $bg-green;
+  }
+}
+
+.modal-orange {
+  .modal-head {
+    background: $bg-orange;
+  }
+}
+
+.modal-yellow {
+  .modal-head {
+    background: $bg-yellow;
+  }
+}
+
+.modal-purple {
+  .modal-head {
+    background: $bg-purple;
+  }
+}
+
+.modal-pink {
+  .modal-head {
+    background: $bg-pink;
+  }
+}
+
+.modal-black {
+  .modal-head {
+    background: $bg-black;
+  }
+}
+
+.modal-gray {
+  .modal-head {
+    background: $bg-gray;
+    color: $text-black;
+    * {
+      color: $text-black;
+    }
+  }
+}
+
+.modal-white {
+  .modal-head {
+    background: $bg-white;
+    color: $text-black;
+    * {
+      color: $text-black;
+    }
   }
 }

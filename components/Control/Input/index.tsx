@@ -126,8 +126,8 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 
           <div className="group-control">
             <input
-              {...restProps}
               ref={ref}
+              {...restProps}
               value={inputValue}
               disabled={controlDisabled}
               placeholder={placeholder}

@@ -18,7 +18,7 @@ const LayoutContainer: React.ForwardRefRenderFunction<HTMLDivElement, LayoutCont
 
   return (
     <LayoutContext.Provider value={initialValue}>
-      <main {...restProps} ref={ref} className={`container ${rootClassName}`}>
+      <main ref={ref} {...restProps} className={`container ${rootClassName}`}>
         {children}
       </main>
     </LayoutContext.Provider>

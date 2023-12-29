@@ -130,8 +130,8 @@ const InputPassword: React.ForwardRefRenderFunction<HTMLInputElement, InputPassw
 
           <div className="group-control">
             <input
-              {...restProps}
               ref={ref}
+              {...restProps}
               value={inputValue}
               disabled={controlDisabled}
               placeholder={placeholder}

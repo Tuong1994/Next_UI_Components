@@ -30,7 +30,7 @@ export interface DatePickerProps {
   onChangeSelect?: (date: Date) => void;
 }
 
-const DatePicker: React.ForwardRefRenderFunction<HTMLInputElement, DatePickerProps> = (
+const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps> = (
   {
     rootClassName = "",
     labelClassName = "",

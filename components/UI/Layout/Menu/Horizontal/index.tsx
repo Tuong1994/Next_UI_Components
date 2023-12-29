@@ -5,7 +5,7 @@ import { MenuItems } from "../type";
 import LayoutContext, { LayoutColor } from "../../Context";
 import MenuHorizontalItem from "./Item";
 
-export interface MenuHorizontalProps {
+export interface MenuHorizontalProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
   itemClassName?: string;
   itemStyle?: React.CSSProperties;
@@ -33,8 +33,8 @@ const MenuHorizontal: React.ForwardRefRenderFunction<HTMLDivElement, MenuHorizon
 
   return (
     <div
-      {...restProps}
       ref={ref}
+      {...restProps}
       className={`menu-horizontal ${colorClassName} ${layoutClassName} ${rootClassName}`}
     >
       {items.map((item) => (

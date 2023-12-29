@@ -51,7 +51,7 @@ const FileUploadControl: React.ForwardRefRenderFunction<HTMLInputElement, FileUp
       onDragLeave={handleDrag}
       onDrop={handleDrop}
     >
-      <input {...restProps} ref={ref} disabled={disabled} type="file" className="group-control" />
+      <input ref={ref} {...restProps} disabled={disabled} type="file" className="group-control" />
       {renderLabel()}
     </label>
   );

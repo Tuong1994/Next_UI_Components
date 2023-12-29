@@ -1,13 +1,17 @@
-"use client"
+"use client";
 
 import React from "react";
 import { HiOutlineChevronDown as ArrowDown } from "react-icons/hi2";
 import utils from "@/utils";
 
+type AccordionType = "default" | "group";
+
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
   bordered?: boolean;
   hasArrow?: boolean;
+  type?: AccordionType;
+  isCollapsed?: boolean;
   extra?: React.ReactNode | React.ReactNode[];
   label?: React.ReactNode | React.ReactNode[];
   children?: React.ReactNode | React.ReactNode[];
@@ -23,6 +27,8 @@ const Accordion: React.ForwardRefRenderFunction<HTMLDivElement, AccordionProps> 
     label,
     children,
     extra,
+    type = "default",
+    isCollapsed = false,
     expandIcon,
     onCollapse,
     ...restProps
@@ -33,27 +39,42 @@ const Accordion: React.ForwardRefRenderFunction<HTMLDivElement, AccordionProps> 
 
   const panelRef = React.useRef<HTMLDivElement>(null);
 
+  const collapsed = type === "default" ? collapse : isCollapsed;
+
   const borderedClassName = bordered ? "accordion-bordered" : "";
 
-  const activeClassName = collapse ? `accordion-active ${!bordered ? "accordion-no-bordered" : ""}` : "";
+  const activeClassName = collapsed ? `accordion-active ${!bordered ? "accordion-no-bordered" : ""}` : "";
 
   React.useEffect(() => {
     onCollapse?.(collapse);
   }, [collapse]);
 
+  React.useEffect(() => {
+    if (!panelRef.current) return;
+    if (panelRef.current === null) return;
+
+    const panel = panelRef.current;
+    if (!isCollapsed) panel.style.maxHeight = "";
+    else panel.style.maxHeight = `${panel.scrollHeight}px`;
+  }, [isCollapsed]);
+
   const handleCollapse = () => {
-    if (!children) return;
     utils.collapse(panelRef);
     setCollapse(!collapse);
   };
 
+  const handleAction = () => {
+    if (!children) return;
+    if (type === "default") handleCollapse();
+  };
+
   return (
     <div
-      {...restProps}
       ref={ref}
+      {...restProps}
       className={`accordion ${borderedClassName} ${activeClassName} ${rootClassName}`}
     >
-      <div className="accordion-head" onClick={handleCollapse}>
+      <div className="accordion-head" onClick={handleAction}>
         <div className="head-label">
           {hasArrow && (
             <div className="label-icon">

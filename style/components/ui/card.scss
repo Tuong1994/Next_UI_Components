@@ -3,10 +3,14 @@
   border: 0.5px solid $bg-slate;
   border-radius: $rounded;
   background: $bg-white;
+  overflow: hidden;
   transition: all $transition-time-md $transition-fn;
   .card-head,
   .card-body {
     padding: $p-2;
+    @include respond(mdPhone) {
+      padding: $p-2 $p-1;
+    }
   }
   .card-head {
     border-bottom: 0.5px solid $bg-slate;

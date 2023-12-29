@@ -38,7 +38,7 @@ export const List: React.FC<ListProps> = React.forwardRef(
           <h4 style={headStyle} className={`list-title ${headClassName}`}>
             {head}
           </h4>
-          <ul {...restProps} ref={ref} className={`list-inner ${contentClassName}`}>
+          <ul ref={ref} {...restProps} className={`list-inner ${contentClassName}`}>
             {children}
           </ul>
         </div>
@@ -62,7 +62,7 @@ export const ListItem: React.FC<ListItemProps> = React.forwardRef(
     const { icon } = React.useContext(ListContext);
 
     return (
-      <li {...restProps} ref={ref} className={`list-item ${rootClassName}`}>
+      <li ref={ref} {...restProps} className={`list-item ${rootClassName}`}>
         <div className="item-icon">{icon}</div>
         <div style={contentStyle} className={`item-content ${contentClassName}`}>
           {children}

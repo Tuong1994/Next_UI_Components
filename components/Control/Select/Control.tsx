@@ -51,8 +51,8 @@ const SelectControl: React.ForwardRefRenderFunction<HTMLInputElement, SelectCont
 
       <div className="group-control">
         <input
-          {...restProps}
           ref={ref}
+          {...restProps}
           disabled={controlDisabled}
           placeholder={placeholder}
           value={renderValue()}

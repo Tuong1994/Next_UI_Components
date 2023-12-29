@@ -10,7 +10,7 @@ const LayoutBody: React.ForwardRefRenderFunction<HTMLDivElement, LayoutBodyProps
   ref
 ) => {
   return (
-    <div {...restProps} ref={ref} className={`body ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={`body ${rootClassName}`}>
       {children}
     </div>
   );

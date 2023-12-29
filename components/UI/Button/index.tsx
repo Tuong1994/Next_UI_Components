@@ -60,8 +60,8 @@ const Button: React.ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
 
   return (
     <button
-      {...restProps}
       ref={ref}
+      {...restProps}
       disabled={btnDisabled}
       className={`button ${sizeClassName} ${shapeClassName} ${colorClassName()} ${loadingClassName} ${disabledClassName} ${rootClassName}`}
     >

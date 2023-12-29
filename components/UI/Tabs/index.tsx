@@ -5,7 +5,7 @@ import TabsHead from "./Head";
 import { TabsItems } from "./type";
 import { ComponentColor } from "@/common/type";
 
-export interface TabsProps {
+export interface TabsProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
   headClassName?: string;
   contentClassName?: string;
@@ -26,6 +26,7 @@ const Tabs: React.ForwardRefRenderFunction<HTMLDivElement, TabsProps> = (
     contentStyle,
     color = "blue",
     items = [],
+    ...restProps
   },
   ref
 ) => {
@@ -58,7 +59,7 @@ const Tabs: React.ForwardRefRenderFunction<HTMLDivElement, TabsProps> = (
   };
 
   return (
-    <div ref={ref} style={style} className={`tabs ${colorClassName} ${rootClassName}`}>
+    <div ref={ref} style={style} {...restProps} className={`tabs ${colorClassName} ${rootClassName}`}>
       <div style={headStyle} className={`tabs-head ${headClassName}`}>
         {renderTitles()}
       </div>

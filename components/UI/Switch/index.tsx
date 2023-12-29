@@ -19,9 +19,9 @@ const Switch: React.ForwardRefRenderFunction<HTMLInputElement, SwitchProps> = (
 
   return (
     <input
-      {...restProps}
       ref={ref}
       type="checkbox"
+      {...restProps}
       className={`switch ${colorClassName} ${sizeClassName} ${rootClassName}`}
     />
   );

@@ -30,7 +30,7 @@ const Card: React.ForwardRefRenderFunction<HTMLDivElement, CardProps> = (
   const hoverClassName = hoverable ? "card-hover" : "";
 
   return (
-    <div {...restProps} ref={ref} className={`card ${hoverClassName} ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={`card ${hoverClassName} ${rootClassName}`}>
       {head && (
         <div style={headStyle} className={`card-head ${headClassName}`}>
           {head}

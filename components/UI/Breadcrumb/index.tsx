@@ -36,7 +36,7 @@ const Breadcrumb: React.ForwardRefRenderFunction<HTMLDivElement, BreadcrumbProps
   };
 
   return (
-    <div {...restProps} ref={ref} className={`breadcrumb ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={`breadcrumb ${rootClassName}`}>
       {renderItems()}
     </div>
   );

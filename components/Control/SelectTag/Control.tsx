@@ -57,8 +57,8 @@ const SelectTagControl: React.ForwardRefRenderFunction<HTMLInputElement, SelectT
         <Tags selectedOptions={selectedOptions} />
 
         <input
-          {...restProps}
           ref={ref}
+          {...restProps}
           disabled={controlDisabled}
           placeholder={placeholder}
           value={renderValue()}

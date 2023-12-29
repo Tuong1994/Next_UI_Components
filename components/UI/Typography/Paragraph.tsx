@@ -55,9 +55,9 @@ const Paragraph: React.ForwardRefRenderFunction<HTMLParagraphElement, ParagraphP
 
   return (
     <p
-      {...restProps}
       ref={ref}
       style={inlineStyle()}
+      {...restProps}
       className={`paragraph ${alignClassName} ${underlineClassName} ${strongClassName} ${removeClassName} ${italicClassName} ${variantClassName} ${rootClassName}`}
     >
       {mark ? <mark>{children}</mark> : children}

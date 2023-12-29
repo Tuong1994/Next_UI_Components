@@ -123,8 +123,8 @@ const CheckBox: React.ForwardRefRenderFunction<HTMLInputElement, CheckBoxProps> 
     >
       <label className={`checkbox-group ${errorClassName} ${disabledClassName}`}>
         <input
-          {...restProps}
           ref={ref}
+          {...restProps}
           value={value}
           checked={isChecked}
           type="checkbox"

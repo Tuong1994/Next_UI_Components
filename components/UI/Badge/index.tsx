@@ -25,7 +25,7 @@ const Badge: React.ForwardRefRenderFunction<HTMLDivElement, BadgeProps> = (
   };
 
   return (
-    <div {...restProps} ref={ref} className={`badge ${colorClassName()} ${shapeClassName} ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={`badge ${colorClassName()} ${shapeClassName} ${rootClassName}`}>
       {children}
     </div>
   );

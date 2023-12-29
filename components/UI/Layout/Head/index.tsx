@@ -20,7 +20,7 @@ const LayoutHead: React.ForwardRefRenderFunction<HTMLDivElement, LayoutHeadProps
   const fixedClassName = fixed || layouted ? `head-fixed` : "";
 
   return (
-    <header {...restProps} ref={ref} className={`head ${fixedClassName} ${themeClassName} ${rootClassName}`}>
+    <header ref={ref} {...restProps} className={`head ${fixedClassName} ${themeClassName} ${rootClassName}`}>
       {children}
     </header>
   );

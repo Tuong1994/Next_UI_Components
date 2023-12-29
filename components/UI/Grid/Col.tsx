@@ -67,9 +67,9 @@ const GridCol: React.ForwardRefRenderFunction<HTMLDivElement, GridColProps> = (
 
   return !hide ? (
     <div
-      {...restProps}
       ref={ref}
       style={inlineStyle}
+      {...restProps}
       className={`grid-col ${fillClassName} ${rootClassName}`}
     >
       {children}

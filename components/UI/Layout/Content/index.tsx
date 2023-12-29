@@ -23,8 +23,8 @@ const LayoutContent: React.ForwardRefRenderFunction<HTMLDivElement, LayoutConten
 
   return (
     <div
-      {...restProps}
       ref={ref}
+      {...restProps}
       className={`content ${layoutClassName} ${shrinkClassName} ${rootClassName}`}
     >
       {children}

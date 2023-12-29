@@ -7,7 +7,7 @@ const { Space, Typography } = UI;
 
 const { Paragraph } = Typography;
 
-interface InfoRowProps extends SpaceProps {
+export interface InfoRowProps extends SpaceProps {
   label?: React.ReactNode;
   text?: React.ReactNode;
   labelProps?: ParagraphProps;
@@ -22,7 +22,7 @@ const InfoRow: React.ForwardRefRenderFunction<HTMLDivElement, InfoRowProps> = (
 
   const textDefaultProps: ParagraphProps = { ...textProps, strong: true };
   return (
-    <Space {...restProps} ref={ref} size={size} rootClassName="info-row">
+    <Space ref={ref} size={size} rootClassName="info-row" {...restProps}>
       <Paragraph {...labelDefaultProps}>{label} :</Paragraph>
       <Paragraph {...textDefaultProps}>{text}</Paragraph>
     </Space>

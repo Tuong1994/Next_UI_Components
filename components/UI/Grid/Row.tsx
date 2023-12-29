@@ -29,9 +29,9 @@ const GridRow: React.ForwardRefRenderFunction<HTMLDivElement, GridRowProps> = (
   return (
     <GridRowContext.Provider value={{ gutters }}>
       <div
-        {...restProps}
         ref={ref}
         style={inlineStyle()}
+        {...restProps}
         className={`grid-row ${justifyClassName} ${alignClassName} ${rootClassName}`}
       >
         {children}

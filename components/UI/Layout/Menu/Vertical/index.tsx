@@ -5,7 +5,7 @@ import { MenuItems } from "../type";
 import LayoutContext, { LayoutColor } from "../../Context";
 import MenuVerticalItem from "./Item";
 
-export interface MenuVerticalProps {
+export interface MenuVerticalProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
   itemClassName?: string;
   itemStyle?: React.CSSProperties;
@@ -32,8 +32,8 @@ const MenuVertical: React.ForwardRefRenderFunction<HTMLDivElement, MenuVerticalP
 
   return (
     <div
-      {...restProps}
       ref={ref}
+      {...restProps}
       className={`menu-vertical ${themeClassName} ${colorClassName} ${rootClassName}`}
     >
       {items.map((item) => (

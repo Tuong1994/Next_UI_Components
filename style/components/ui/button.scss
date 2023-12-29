@@ -261,8 +261,12 @@
   background: $bg-slate !important;
   color: $text-gray;
   user-select: none;
-  pointer-events: none;
+  cursor: not-allowed;
   * {
     color: $text-gray;
+  }
+  &::after,
+  &::before {
+    content: unset;
   }
 }
