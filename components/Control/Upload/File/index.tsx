@@ -56,6 +56,14 @@ const FileUpload: React.ForwardRefRenderFunction<HTMLInputElement, FileUploadPro
 
   const gapClassName = isForm ? "file-upload-gap" : "";
 
+  const mainClassName = utils.formatClassName(
+    "file-upload",
+    colorClassName,
+    gapClassName,
+    shapeClassName,
+    rootClassName
+  );
+
   React.useEffect(() => {
     onUpload?.(files.map((uploadFile) => uploadFile.file as File));
   }, [files.length]);
@@ -120,13 +128,10 @@ const FileUpload: React.ForwardRefRenderFunction<HTMLInputElement, FileUploadPro
   };
 
   return (
-    <div
-      style={rootStyle}
-      className={`file-upload ${colorClassName} ${gapClassName} ${shapeClassName} ${rootClassName}`}
-    >
+    <div style={rootStyle} className={mainClassName}>
       <Control
-        {...restProps}
         ref={ref}
+        {...restProps}
         id="fileUpload"
         controlClassName={controlClassName}
         controlStyle={controlStyle}

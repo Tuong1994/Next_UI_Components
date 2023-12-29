@@ -3,8 +3,9 @@
 import React from "react";
 import { ComponentColor } from "@/common/type";
 import { FaSpinner } from "react-icons/fa";
+import utils from "@/utils";
 
-type SpinnerType = "default" | "bubble"
+type SpinnerType = "default" | "bubble";
 
 export interface SpinnerProps {
   rootClassName?: string;
@@ -25,17 +26,16 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   const colorClassName = type === "default" ? `spinner-default-${color}` : `spinner-bubble-${color}`;
 
+  const defaultClassName = utils.formatClassName("spinner-default", colorClassName, rootClassName);
+
+  const bubbleClassName = utils.formatClassName("spinner-bubble", colorClassName, rootClassName);
+
   return (
     <React.Fragment>
-      {type === "default" && (
-        <FaSpinner
-          style={style}
-          size={size}
-          className={`spinner-default ${colorClassName} ${rootClassName}`}
-        />
-      )}
+      {type === "default" && <FaSpinner style={style} size={size} className={defaultClassName} />}
+
       {type === "bubble" && (
-        <div style={style} className={`spinner-bubble ${colorClassName} ${rootClassName}`}>
+        <div style={style} className={bubbleClassName}>
           {[...Array(2)].map((_, idx) => (
             <div className="bubble-item" key={idx}>
               <div style={dotStyle} className="item-dot"></div>

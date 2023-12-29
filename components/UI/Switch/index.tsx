@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ComponentColor, ComponentSize } from "@/common/type";
+import utils from "@/utils";
 
 export interface SwitchProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rootClassName?: string;
@@ -17,14 +18,9 @@ const Switch: React.ForwardRefRenderFunction<HTMLInputElement, SwitchProps> = (
 
   const colorClassName = `switch-${color}`;
 
-  return (
-    <input
-      ref={ref}
-      type="checkbox"
-      {...restProps}
-      className={`switch ${colorClassName} ${sizeClassName} ${rootClassName}`}
-    />
-  );
+  const className = utils.formatClassName("switch", colorClassName, sizeClassName, rootClassName);
+
+  return <input ref={ref} type="checkbox" {...restProps} className={className} />;
 };
 
 export default React.forwardRef(Switch);

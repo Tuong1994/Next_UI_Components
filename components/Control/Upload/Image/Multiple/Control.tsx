@@ -1,5 +1,6 @@
 import React from "react";
 import { BsCloudUpload } from "react-icons/bs";
+import utils from "@/utils";
 
 interface MultipleImageUploadControlProps extends React.InputHTMLAttributes<HTMLInputElement> {
   controlClassName?: string;
@@ -11,6 +12,8 @@ const MultipleImageUploadControl: React.ForwardRefRenderFunction<
   HTMLInputElement,
   MultipleImageUploadControlProps
 > = ({ controlClassName = "", controlStyle, label, ...restProps }, ref) => {
+  const controlInputClassName = utils.formatClassName("group-control", controlClassName);
+
   const renderLabel = () => {
     if (label) return label;
     return (
@@ -22,7 +25,7 @@ const MultipleImageUploadControl: React.ForwardRefRenderFunction<
   };
 
   return (
-    <label style={controlStyle} className={`group-control ${controlClassName}`}>
+    <label style={controlStyle} className={controlInputClassName}>
       <input ref={ref} {...restProps} type="file" multiple className="control-input" />
       {renderLabel()}
     </label>

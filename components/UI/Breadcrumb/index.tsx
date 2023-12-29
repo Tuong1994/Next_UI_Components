@@ -3,6 +3,7 @@
 import React from "react";
 import { BreadcrumbItems } from "./type";
 import { HiChevronRight } from "react-icons/hi2";
+import utils from "@/utils";
 
 export interface BreadcrumbProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -23,12 +24,16 @@ const Breadcrumb: React.ForwardRefRenderFunction<HTMLDivElement, BreadcrumbProps
   },
   ref
 ) => {
+  const mainClassName = utils.formatClassName("breadcrumb", rootClassName);
+
+  const breadCrumbItemClassName = utils.formatClassName("breadcrumb-item", itemClassName);
+
   const renderItems = () => {
     return items.map((item, idx) => {
       const activeClassName = item.actived ? "item-label-active" : "";
       return (
-        <div key={item.id} style={itemStyle} className={`breadcrumb-item ${itemClassName}`}>
-          <div className={`item-label ${activeClassName}`}>{item.label}</div>
+        <div key={item.id} style={itemStyle} className={breadCrumbItemClassName}>
+          <div className={utils.formatClassName("item-label", activeClassName)}>{item.label}</div>
           {idx !== items.length - 1 && <div className="item-separator">{separator}</div>}
         </div>
       );
@@ -36,7 +41,7 @@ const Breadcrumb: React.ForwardRefRenderFunction<HTMLDivElement, BreadcrumbProps
   };
 
   return (
-    <div ref={ref} {...restProps} className={`breadcrumb ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={mainClassName}>
       {renderItems()}
     </div>
   );

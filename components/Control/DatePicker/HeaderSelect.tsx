@@ -3,6 +3,7 @@ import { Option, SelectOptions } from "../type";
 import { HiOutlineChevronDown as ArrowDown } from "react-icons/hi2";
 import useRender from "@/hooks/useRender";
 import useClickOutside from "@/hooks/useClickOutside";
+import utils from "@/utils";
 
 interface HeaderSelectProps {
   type: "month" | "year";
@@ -44,7 +45,7 @@ const HeaderSelect: React.FC<HeaderSelectProps> = ({ type, options, currentOptio
       </div>
 
       {render && (
-        <div className={`select-dropdown ${dropdownClassName}`}>
+        <div className={utils.formatClassName("select-dropdown", dropdownClassName)}>
           {options.map((option, idx) => (
             <div key={idx} className="dropdown-item" onClick={() => handleSelect(option)}>
               {option.label}

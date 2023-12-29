@@ -8,6 +8,7 @@ import Loading from "./Loading";
 import Control from "./Control";
 import Image from "@/components/UI/Image";
 import FormContext from "@/components/Control/Form/FormContext";
+import utils from "@/utils";
 
 export interface SingleImageUploadProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rootClassName?: string;
@@ -15,7 +16,7 @@ export interface SingleImageUploadProps extends React.InputHTMLAttributes<HTMLIn
   rootStyle?: React.CSSProperties;
   controlStyle?: React.CSSProperties;
   shape?: ControlShape;
-  color?: ControlColor
+  color?: ControlColor;
   limit?: number;
   defaultImageUrl?: string;
   fileAccepted?: string;
@@ -68,6 +69,21 @@ const SingleImageUpload: React.ForwardRefRenderFunction<HTMLInputElement, Single
   const errorClassName = error?.active ? "upload-group-error" : "";
 
   const dragClassName = dragged ? "upload-group-dragged" : "";
+
+  const mainClassName = utils.formatClassName(
+    "single-image-upload",
+    gapClassName,
+    shapeClassName,
+    colorClassName,
+    rootClassName
+  );
+
+  const groupClassName = utils.formatClassName(
+    "upload-group",
+    errorClassName,
+    dragClassName,
+    disabledClassName
+  );
 
   // Set default image
   React.useEffect(() => {
@@ -141,16 +157,13 @@ const SingleImageUpload: React.ForwardRefRenderFunction<HTMLInputElement, Single
     }
     setViewImage("");
     setImage(null);
-    onUpload?.(null)
+    onUpload?.(null);
   };
 
   return (
-    <div
-      style={rootStyle}
-      className={`single-image-upload ${gapClassName} ${shapeClassName} ${colorClassName} ${rootClassName}`}
-    >
+    <div style={rootStyle} className={mainClassName}>
       <div
-        className={`upload-group ${errorClassName} ${dragClassName} ${disabledClassName}`}
+        className={groupClassName}
         onDragEnter={handleDrag}
         onDragOver={handleDrag}
         onDragLeave={handleDrag}

@@ -3,6 +3,7 @@
 import React from "react";
 import { HiUser } from "react-icons/hi2";
 import { ComponentColor, ComponentShape } from "@/common/type";
+import utils from "@/utils";
 
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -36,9 +37,13 @@ const Avatar: React.ForwardRefRenderFunction<HTMLDivElement, AvatarProps> = (
 
   const colorClassName = !children ? `avatar-${color}` : "";
 
-  const badgeClassName = badge && badge.length > 1 ? "avatar-badge-radius" : "";
+  const badgeRadiusClassName = badge && badge.length > 1 ? "avatar-badge-radius" : "";
 
   const inlineStyle = { ...style, width: `${size}px`, height: `${size}px` };
+
+  const mainClassName = utils.formatClassName("avatar", colorClassName, shapeClassName, rootClassName);
+
+  const badgeClassName = utils.formatClassName("avatar-badge", badgeRadiusClassName);
 
   React.useEffect(() => {
     setIconSize(18);
@@ -53,13 +58,8 @@ const Avatar: React.ForwardRefRenderFunction<HTMLDivElement, AvatarProps> = (
   };
 
   return (
-    <div
-      ref={ref}
-      style={inlineStyle}
-      {...restProps}
-      className={`avatar ${colorClassName} ${shapeClassName} ${rootClassName}`}
-    >
-      {badge && <div className={`avatar-badge ${badgeClassName}`}>{badge}</div>}
+    <div ref={ref} {...restProps} style={inlineStyle} className={mainClassName}>
+      {badge && <div className={badgeClassName}>{badge}</div>}
 
       {dot && <div className="avatar-dot" />}
 

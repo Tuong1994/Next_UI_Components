@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import utils from "@/utils";
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -29,15 +30,21 @@ const Card: React.ForwardRefRenderFunction<HTMLDivElement, CardProps> = (
 ) => {
   const hoverClassName = hoverable ? "card-hover" : "";
 
+  const mainClassName = utils.formatClassName("card", hoverClassName, rootClassName);
+
+  const cardHeadClassName = utils.formatClassName("card-head", headClassName);
+
+  const cardBodyClassName = utils.formatClassName("card-body", bodyClassName);
+
   return (
-    <div ref={ref} {...restProps} className={`card ${hoverClassName} ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={mainClassName}>
       {head && (
-        <div style={headStyle} className={`card-head ${headClassName}`}>
+        <div style={headStyle} className={cardHeadClassName}>
           {head}
         </div>
       )}
 
-      <div style={bodyStyle} className={`card-body ${bodyClassName}`}>
+      <div style={bodyStyle} className={cardBodyClassName}>
         {children}
       </div>
     </div>

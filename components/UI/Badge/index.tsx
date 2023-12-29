@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ComponentColor, ComponentShape } from "@/common/type";
+import utils from "@/utils";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -24,8 +25,10 @@ const Badge: React.ForwardRefRenderFunction<HTMLDivElement, BadgeProps> = (
     return "";
   };
 
+  const className = utils.formatClassName("badge", colorClassName(), shapeClassName, rootClassName);
+
   return (
-    <div ref={ref} {...restProps} className={`badge ${colorClassName()} ${shapeClassName} ${rootClassName}`}>
+    <div ref={ref} {...restProps} className={className}>
       {children}
     </div>
   );

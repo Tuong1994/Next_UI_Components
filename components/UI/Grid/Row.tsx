@@ -3,6 +3,7 @@
 import React from "react";
 import { ComponentAligns, ComponentJustify } from "@/common/type";
 import { GridRowContext } from "./Context";
+import utils from "@/utils";
 
 export interface GridRowProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -20,6 +21,8 @@ const GridRow: React.ForwardRefRenderFunction<HTMLDivElement, GridRowProps> = (
 
   const alignClassName = `grid-row-${align}`;
 
+  const className = utils.formatClassName("grid-row", justifyClassName, alignClassName, rootClassName);
+
   const inlineStyle = () => {
     if (!gutters.length) return { ...style, gap: "10px" };
     if (gutters.length === 1) return { ...style, gap: `${gutters[0]}px` };
@@ -28,12 +31,7 @@ const GridRow: React.ForwardRefRenderFunction<HTMLDivElement, GridRowProps> = (
 
   return (
     <GridRowContext.Provider value={{ gutters }}>
-      <div
-        ref={ref}
-        style={inlineStyle()}
-        {...restProps}
-        className={`grid-row ${justifyClassName} ${alignClassName} ${rootClassName}`}
-      >
+      <div ref={ref} style={inlineStyle()} {...restProps} className={className}>
         {children}
       </div>
     </GridRowContext.Provider>

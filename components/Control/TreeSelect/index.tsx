@@ -9,6 +9,7 @@ import SelectControl from "./Control";
 import FormContext from "../Form/FormContext";
 import FormItemContext from "../Form/FormItemContext";
 import SelectOption from "./Option";
+import utils from "@/utils";
 
 export interface TreeSelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rootClassName?: string;
@@ -46,6 +47,7 @@ const TreeSelect: React.ForwardRefRenderFunction<HTMLInputElement, TreeSelectPro
     sizes = "md",
     color = "blue",
     shape = "square",
+    placeholder,
     disabled,
     options = [],
     defaultValue,
@@ -104,6 +106,12 @@ const TreeSelect: React.ForwardRefRenderFunction<HTMLInputElement, TreeSelectPro
     setSelectedOption(defaultOption);
   }, [defaultValue, rhfValue, isRhf]);
 
+  const controlPlaceHolder = React.useMemo(() => {
+    if (placeholder) return placeholder;
+    if (dropdown) return "Search";
+    return "Select option";
+  }, [placeholder, dropdown]);
+
   const controlDisabled = rhfDisabled ? rhfDisabled : disabled;
 
   const controlColor = isRhf ? rhfColor : color;
@@ -125,6 +133,19 @@ const TreeSelect: React.ForwardRefRenderFunction<HTMLInputElement, TreeSelectPro
   const disabledClassName = controlDisabled ? "tree-select-disabled" : "";
 
   const errorClassName = rhfError ? "tree-select-error" : "";
+
+  const mainClassName = utils.formatClassName(
+    "tree-zselect",
+    colorClassName,
+    sizeClassName,
+    shapeClassName,
+    bottomClassName,
+    errorClassName,
+    rootClassName,
+    disabledClassName
+  );
+
+  const controlLabelClassName = utils.formatClassName("tree-zselect-label", labelClassName);
 
   const iconSize = () => {
     if (controlSize === "sm") return 14;
@@ -179,13 +200,9 @@ const TreeSelect: React.ForwardRefRenderFunction<HTMLInputElement, TreeSelectPro
   };
 
   return (
-    <div
-      ref={selectRef}
-      style={rootStyle}
-      className={`tree-select ${colorClassName} ${sizeClassName} ${shapeClassName} ${bottomClassName} ${errorClassName} ${rootClassName} ${disabledClassName}`}
-    >
+    <div ref={selectRef} style={rootStyle} className={mainClassName}>
       {label && (
-        <label style={labelStyle} className={`tree-select-label ${labelClassName}`}>
+        <label style={labelStyle} className={controlLabelClassName}>
           {label}
         </label>
       )}
@@ -201,6 +218,7 @@ const TreeSelect: React.ForwardRefRenderFunction<HTMLInputElement, TreeSelectPro
           rhfError={rhfError}
           dropdown={dropdown}
           controlDisabled={controlDisabled}
+          placeholder={controlPlaceHolder}
           showClearIcon={showClearIcon}
           iconSize={iconSize}
           onChange={handleSearch}

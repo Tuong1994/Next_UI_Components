@@ -5,6 +5,7 @@ import { useFormContext } from "react-hook-form";
 import { ComponentColor, ComponentSize } from "@/common/type";
 import FormContext from "../Form/FormContext";
 import FormItemContext from "../Form/FormItemContext";
+import utils from "@/utils";
 
 export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rootClassName?: string;
@@ -66,6 +67,20 @@ const Radio: React.ForwardRefRenderFunction<HTMLInputElement, RadioProps> = (
 
   const disabledClassName = controlDisabled ? "radio-group-disabled" : "";
 
+  const mainClassName = utils.formatClassName(
+    "radio",
+    gapClassName,
+    sizeClassName,
+    colorClassName,
+    rootClassName
+  );
+
+  const groupClassName = utils.formatClassName("radio-group", errorClassName, disabledClassName);
+
+  const controlLabelClassName = utils.formatClassName("group-label", labelClassName);
+
+  const controlCheckClassName = utils.formatClassName("group-checked", controlClassName);
+
   React.useEffect(() => {
     if (!isRhf) return setIsChecked(checked);
     if (isRhf && rhfValue == value) return setIsChecked(true);
@@ -73,18 +88,16 @@ const Radio: React.ForwardRefRenderFunction<HTMLInputElement, RadioProps> = (
 
   const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setIsChecked(e.target.checked);
+    const checked = e.target.checked;
+    setIsChecked(checked);
     onCheck?.(value);
   };
 
   const onChangeFn = rhfOnChange ? rhfOnChange : handleChecked;
 
   return (
-    <div
-      style={rootStyle}
-      className={`radio ${gapClassName} ${sizeClassName} ${colorClassName} ${rootClassName}`}
-    >
-      <label className={`radio-group ${errorClassName} ${disabledClassName}`}>
+    <div style={rootStyle} className={mainClassName}>
+      <label className={groupClassName}>
         <input
           {...rhfMethods?.register(rhfName)}
           ref={ref}
@@ -98,10 +111,10 @@ const Radio: React.ForwardRefRenderFunction<HTMLInputElement, RadioProps> = (
           onChange={onChangeFn}
         />
 
-        <div style={controlStyle} className={`group-checked ${controlClassName}`} />
+        <div style={controlStyle} className={controlCheckClassName} />
 
         {label && (
-          <div style={labelStyle} className={`group-label ${labelClassName}`}>
+          <div style={labelStyle} className={controlLabelClassName}>
             {label}
           </div>
         )}

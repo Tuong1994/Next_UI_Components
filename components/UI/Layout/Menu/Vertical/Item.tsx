@@ -4,6 +4,7 @@ import { HiOutlineChevronDown } from "react-icons/hi2";
 import { Tooltip } from "@/components/UI";
 import { LayoutColor } from "../../Context";
 import useLayoutStore from "../../LayoutStore";
+import utils from "@/utils";
 
 interface MenuVerticalItemProps {
   item: MenuItem;
@@ -45,24 +46,25 @@ const MenuVerticalItem: React.FC<MenuVerticalItemProps> = ({
 
   const shrinkClassName = shrinked ? "vertical-item-shrinked" : "";
 
+  const mainClassName = utils.formatClassName("vertical-item", shrinkClassName, itemClassName);
+
+  const tooltipTitleClassName = utils.formatClassName("item-label", rootLabelClassName, labelActiveClassName);
+
+  const itemChildClassName = utils.formatClassName("item-children", rootChildClassName, childActiveClassName);
+
   const handleOpen = (e: any) => {
     if (e.type === "click") return hasChild ? setOpen(!open) : handleSelectMenu(item.id);
     if (shrinked && item.isRoot) setOpen(!open);
   };
 
   return (
-    <div
-      style={itemStyle}
-      className={`vertical-item ${shrinkClassName} ${itemClassName}`}
-      onMouseEnter={handleOpen}
-      onMouseLeave={handleOpen}
-    >
+    <div style={itemStyle} className={mainClassName} onMouseEnter={handleOpen} onMouseLeave={handleOpen}>
       <Tooltip
         placement="right"
         color={color}
         label={showTooltipContent ? item.label : ""}
         rootClassName="item-tooltip-wrap"
-        titleClassName={`item-label ${rootLabelClassName} ${labelActiveClassName}`}
+        titleClassName={tooltipTitleClassName}
         onClick={handleOpen}
       >
         <div className="label-content">
@@ -71,14 +73,14 @@ const MenuVerticalItem: React.FC<MenuVerticalItemProps> = ({
         </div>
 
         {hasChild && (
-          <div className={`label-arrow ${iconActiveClassName}`}>
+          <div className={utils.formatClassName("label-arrow", iconActiveClassName)}>
             <HiOutlineChevronDown className="arrow-icon" />
           </div>
         )}
       </Tooltip>
 
       {hasChild && (
-        <div className={`item-children ${rootChildClassName} ${childActiveClassName}`}>
+        <div className={itemChildClassName}>
           {item.children &&
             item.children.map((item) => (
               <MenuVerticalItem

@@ -3,6 +3,7 @@ import { SelectDate } from "../type";
 import CalendarHeader from "./CalendarHeader";
 import CalendarDay from "./CalendarDay";
 import CalendarDate from "./CalenderDate";
+import utils from "@/utils";
 
 interface DatePickerCalendarProps {
   min?: "today" | string;
@@ -26,6 +27,8 @@ const DatePickerCalender: React.FC<DatePickerCalendarProps> = ({
   const [currentYear, setCurrentYear] = React.useState<number>(new Date().getFullYear());
 
   const dropdownClassName = dropdown ? "wrap-calendar-active" : "";
+
+  const className = utils.formatClassName("wrap-calendar", dropdownClassName);
 
   React.useEffect(() => {
     setCurrentDate(selectedDate);
@@ -59,7 +62,7 @@ const DatePickerCalender: React.FC<DatePickerCalendarProps> = ({
   };
 
   return (
-    <div className={`wrap-calendar ${dropdownClassName}`}>
+    <div className={className}>
       <CalendarHeader
         currentMonth={currentMonth}
         currentYear={currentYear}

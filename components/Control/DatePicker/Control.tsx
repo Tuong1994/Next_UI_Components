@@ -1,6 +1,7 @@
 import React from "react";
 import { HiCalendar, HiOutlineArrowPath } from "react-icons/hi2";
 import moment from "moment";
+import utils from "@/utils";
 
 interface DatePickerControlProps {
   addonBefore?: React.ReactNode | React.ReactNode[];
@@ -25,12 +26,14 @@ const DatePickerControl: React.FC<DatePickerControlProps> = ({
   handleResetInput,
   handleDropdown,
 }) => {
+  const controlInputClassName = utils.formatClassName("control-box", inputClassName);
+
   return (
     <div className="wrap-group" onClick={handleDropdown}>
       {addonBefore && <div className="group-addon group-addon-before">{addonBefore}</div>}
 
       <div className="group-control">
-        <div className={`control-box ${inputClassName}`}>{moment(selectedDate).format(format)}</div>
+        <div className={controlInputClassName}>{moment(selectedDate).format(format)}</div>
 
         {showResetIcon && (
           <div className="control-action" onClick={handleResetInput}>

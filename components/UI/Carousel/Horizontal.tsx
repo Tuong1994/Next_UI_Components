@@ -4,6 +4,7 @@ import React from "react";
 import { CarouselItems } from "./type";
 import { HiOutlineChevronLeft as ArrowLeft, HiOutlineChevronRight as ArrowRight } from "react-icons/hi2";
 import useCarousel from "./useCarousel";
+import utils from "@/utils";
 
 export interface CarouselHorizontalProps {
   rootClassName?: string;
@@ -13,6 +14,7 @@ export interface CarouselHorizontalProps {
   time?: number;
   infinite?: boolean;
   autoPlay?: boolean;
+  hasArrow?: boolean;
   hasManualStop?: boolean;
   leftButtonIcon?: React.ReactNode | React.ReactNode[];
   rightButtonIcon?: React.ReactNode | React.ReactNode[];
@@ -33,6 +35,7 @@ const CarouselHorizontal: React.ForwardRefRenderFunction<HTMLDivElement, Carouse
     infinite,
     autoPlay,
     hasManualStop,
+    hasArrow = true,
     leftButtonIcon = <ArrowLeft size={30} />,
     rightButtonIcon = <ArrowRight size={30} />,
     items = [
@@ -79,6 +82,17 @@ const CarouselHorizontal: React.ForwardRefRenderFunction<HTMLDivElement, Carouse
   const prevBtnDisabledClassName = prevBtnDisabled ? "carousel-action-disabled" : "";
 
   const nextBtnDisabledClassName = nextBtnDisabled ? "carousel-action-disabled" : "";
+
+  const mainClassName = utils.formatClassName(
+    "carousel",
+    "carousel-horizontal",
+    modeClassName,
+    rootClassName
+  );
+
+  const leftActionClassName = utils.formatClassName("carousel-action", prevBtnDisabledClassName);
+
+  const rightActionClassName = utils.formatClassName("carousel-action", nextBtnDisabledClassName);
 
   const jumpToSlide = (pos: number) => {
     setSlidePos(pos);
@@ -189,18 +203,28 @@ const CarouselHorizontal: React.ForwardRefRenderFunction<HTMLDivElement, Carouse
   const renderDots = () => {
     return items.map((item, idx) => {
       const dotActiveClassName = slidePos === idx ? "dots-item-active" : "";
-      return <div key={item.id} className={`dots-item ${dotActiveClassName}`} onClick={() => jumpToSlide(idx)} />;
+      return (
+        <div
+          key={item.id}
+          className={utils.formatClassName("dots-item", dotActiveClassName)}
+          onClick={() => jumpToSlide(idx)}
+        />
+      );
     });
   };
 
   return (
-    <div ref={ref} style={style} className={`carousel carousel-horizontal ${modeClassName} ${rootClassName}`}>
-      <button disabled={prevBtnDisabled} className={`carousel-action ${prevBtnDisabledClassName}`} onClick={onPrev}>
-        {leftButtonIcon}
-      </button>
-      <button disabled={nextBtnDisabled} className={`carousel-action ${nextBtnDisabledClassName}`} onClick={onNext}>
-        {rightButtonIcon}
-      </button>
+    <div ref={ref} style={style} className={mainClassName}>
+      {hasArrow && (
+        <button disabled={prevBtnDisabled} className={leftActionClassName} onClick={onPrev}>
+          {leftButtonIcon}
+        </button>
+      )}
+      {hasArrow && (
+        <button disabled={nextBtnDisabled} className={rightActionClassName} onClick={onNext}>
+          {rightButtonIcon}
+        </button>
+      )}
       <div
         id="carouselView"
         className="carousel-view"

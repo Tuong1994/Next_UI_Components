@@ -5,6 +5,7 @@ import { DropdownItems } from "./type";
 import { ComponentPlacement } from "@/common/type";
 import useRender from "@/hooks/useRender";
 import useClickOutside from "@/hooks/useClickOutside";
+import utils from "@/utils";
 
 type TriggerType = "click" | "hover";
 
@@ -48,6 +49,16 @@ const Dropdown: React.ForwardRefRenderFunction<HTMLDivElement, DropdownProps> = 
 
   const openClassName = open ? "dropdown-wrap-active" : "";
 
+  const hoverClassName = trigger === "hover" ? "dropdown-hover" : "";
+
+  const isRender = trigger === "click" ? render : true;
+
+  const mainClassName = utils.formatClassName("dropdown", placementClassName, hoverClassName, rootClassName);
+
+  const dropdownTitleClassName = utils.formatClassName("dropdown-title", titleClassName);
+
+  const dropdownListClassName = utils.formatClassName("dropdown-wrap", openClassName, dropdownClassName);
+
   const renderItems = () => {
     return items.map((item) => (
       <div key={item.id} className="wrap-item">
@@ -60,25 +71,15 @@ const Dropdown: React.ForwardRefRenderFunction<HTMLDivElement, DropdownProps> = 
 
   const handleClick = () => trigger === "click" && handleOpen();
 
-  const handleMouseEnter = () => trigger === "hover" && handleOpen();
-
-  const handleMouseLeave = () => trigger === "hover" && handleOpen();
-
   return (
     <div ref={dropdownRef}>
-      <div ref={ref} style={style} className={`dropdown ${placementClassName} ${rootClassName}`}>
-        <div
-          className={`dropdown-title ${titleClassName}`}
-          style={titleStyle}
-          onClick={handleClick}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
+      <div ref={ref} style={style} className={mainClassName}>
+        <div className={dropdownTitleClassName} style={titleStyle} onClick={handleClick}>
           {children}
         </div>
 
-        {render && (
-          <div style={dropdownStyle} className={`dropdown-wrap ${openClassName} ${dropdownClassName}`}>
+        {isRender && (
+          <div style={dropdownStyle} className={dropdownListClassName}>
             {renderItems()}
           </div>
         )}

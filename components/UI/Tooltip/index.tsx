@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ComponentColor, ComponentPlacement } from "@/common/type";
+import utils from "@/utils";
 
 export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -36,18 +37,22 @@ const Tooltip: React.ForwardRefRenderFunction<HTMLDivElement, TooltipProps> = (
 
   const arrowColorClassName = `title-arrow-${color}`;
 
+  const mainClassName = utils.formatClassName("tooltip", placementClassName, colorClassName, rootClassName);
+
+  const tooltipTitleClassName = utils.formatClassName("tooltip-title", titleClassName);
+
+  const toolTipContentClassName = utils.formatClassName("tooltip-content", labelClassName);
+
+  const tooltipArrowClassName = utils.formatClassName("title-arrow", arrowColorClassName);
+
   return (
-    <div
-      ref={ref}
-      {...restProps}
-      className={`tooltip ${placementClassName} ${colorClassName} ${rootClassName}`}
-    >
-      <div style={titleStyle} className={`tooltip-title ${titleClassName}`}>
+    <div ref={ref} {...restProps} className={mainClassName}>
+      <div style={titleStyle} className={tooltipTitleClassName}>
         {children}
-        {label && <span className={`title-arrow ${arrowColorClassName}`}></span>}
+        {label && <span className={tooltipArrowClassName}></span>}
       </div>
       {label && (
-        <div style={labelStyle} className={`tooltip-content ${labelClassName}`}>
+        <div style={labelStyle} className={toolTipContentClassName}>
           {label}
         </div>
       )}

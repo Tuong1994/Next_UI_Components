@@ -3,6 +3,7 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa";
 import ListContext, { ListContextState } from "./ListContext";
+import utils from "@/utils";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   rootClassName?: string;
@@ -23,7 +24,7 @@ export const List: React.FC<ListProps> = React.forwardRef(
       contentClassName = "",
       rootStyle,
       headStyle,
-      head = "Title",
+      head,
       icon = <FaCheck />,
       children,
       ...restProps
@@ -32,13 +33,21 @@ export const List: React.FC<ListProps> = React.forwardRef(
   ) => {
     const initialValue: ListContextState = { icon };
 
+    const mainClassName = utils.formatClassName("list", rootClassName);
+
+    const listTitleClassName = utils.formatClassName("list-title", headClassName);
+
+    const listContentClassName = utils.formatClassName("list-inner", contentClassName);
+
     return (
       <ListContext.Provider value={initialValue}>
-        <div style={rootStyle} className={`list ${rootClassName}`}>
-          <h4 style={headStyle} className={`list-title ${headClassName}`}>
-            {head}
-          </h4>
-          <ul ref={ref} {...restProps} className={`list-inner ${contentClassName}`}>
+        <div style={rootStyle} className={mainClassName}>
+          {head && (
+            <h4 style={headStyle} className={listTitleClassName}>
+              {head}
+            </h4>
+          )}
+          <ul ref={ref} {...restProps} className={listContentClassName}>
             {children}
           </ul>
         </div>
@@ -61,10 +70,14 @@ export const ListItem: React.FC<ListItemProps> = React.forwardRef(
   ) => {
     const { icon } = React.useContext(ListContext);
 
+    const mainClassName = utils.formatClassName("list-item", rootClassName);
+
+    const listItemContentClassName = utils.formatClassName("item-content", contentClassName);
+
     return (
-      <li ref={ref} {...restProps} className={`list-item ${rootClassName}`}>
-        <div className="item-icon">{icon}</div>
-        <div style={contentStyle} className={`item-content ${contentClassName}`}>
+      <li ref={ref} {...restProps} className={mainClassName}>
+        {icon && <div className="item-icon">{icon}</div>}
+        <div style={contentStyle} className={listItemContentClassName}>
           {children}
         </div>
       </li>

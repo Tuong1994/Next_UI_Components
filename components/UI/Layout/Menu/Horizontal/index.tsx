@@ -4,8 +4,9 @@ import React from "react";
 import { MenuItems } from "../type";
 import LayoutContext, { LayoutColor } from "../../Context";
 import MenuHorizontalItem from "./Item";
+import utils from "@/utils";
 
-export interface MenuHorizontalProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MenuHorizontalProps {
   rootClassName?: string;
   itemClassName?: string;
   itemStyle?: React.CSSProperties;
@@ -25,6 +26,8 @@ const MenuHorizontal: React.ForwardRefRenderFunction<HTMLDivElement, MenuHorizon
 
   const layoutClassName = layouted ? "menu-horizontal-layout" : "";
 
+  const className = utils.formatClassName("menu-horizontal", colorClassName, layoutClassName, rootClassName);
+
   const handleOpenMenu = (id: string) => {
     const idx = activeId.indexOf(id);
     if (idx === -1) setActiveId((prev) => [...prev, id]);
@@ -32,11 +35,7 @@ const MenuHorizontal: React.ForwardRefRenderFunction<HTMLDivElement, MenuHorizon
   };
 
   return (
-    <div
-      ref={ref}
-      {...restProps}
-      className={`menu-horizontal ${colorClassName} ${layoutClassName} ${rootClassName}`}
-    >
+    <div ref={ref} {...restProps} className={className}>
       {items.map((item) => (
         <MenuHorizontalItem
           key={item.id}

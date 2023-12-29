@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ComponentAligns, ComponentJustify } from "@/common/type";
+import utils from "@/utils";
 
 type SpaceSize = "sm" | "md" | "lg" | number;
 
@@ -21,6 +22,8 @@ const Space: React.ForwardRefRenderFunction<HTMLDivElement, SpaceProps> = (
 
   const alignClassName = `space-${align}`;
 
+  const className = utils.formatClassName("space", justifyClassName, alignClassName, rootClassName);
+
   const rootStyle = () => {
     if (typeof size === "number") return { ...style, gap: `10px ${size}px` };
     if (size === "sm") return { ...style, gap: "10px" };
@@ -29,12 +32,7 @@ const Space: React.ForwardRefRenderFunction<HTMLDivElement, SpaceProps> = (
   };
 
   return (
-    <div
-      ref={ref}
-      style={rootStyle()}
-      {...restProps}
-      className={`space ${justifyClassName} ${alignClassName} ${rootClassName}`}
-    >
+    <div ref={ref} style={rootStyle()} {...restProps} className={className}>
       {children}
     </div>
   );

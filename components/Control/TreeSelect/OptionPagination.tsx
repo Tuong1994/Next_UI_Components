@@ -1,5 +1,6 @@
 import React from "react";
 import { HiOutlineChevronRight as ArrowRight, HiOutlineChevronLeft as ArrowLeft } from "react-icons/hi2";
+import utils from "@/utils";
 
 interface OptionPaginationProps {
   currentPage: number;
@@ -22,6 +23,10 @@ const OptionPagination: React.FC<OptionPaginationProps> = ({
 
   const nextBtnDisabledClassName = nextBtnDisabled ? "actions-btn-disabled" : "";
 
+  const leftActionClassName = utils.formatClassName("actions-btn", prevBtnDisabledClassName);
+
+  const rightActionClassName = utils.formatClassName("actions-btn", nextBtnDisabledClassName);
+
   return (
     <div className="option-pagination">
       <div className="pagination-content">
@@ -31,7 +36,7 @@ const OptionPagination: React.FC<OptionPaginationProps> = ({
         <button
           type="button"
           disabled={prevBtnDisabled}
-          className={`actions-btn ${prevBtnDisabledClassName}`}
+          className={leftActionClassName}
           onClick={() => handleChangePage("prev")}
         >
           <ArrowLeft />
@@ -39,7 +44,7 @@ const OptionPagination: React.FC<OptionPaginationProps> = ({
         <button
           type="button"
           disabled={nextBtnDisabled}
-          className={`actions-btn ${nextBtnDisabledClassName}`}
+          className={rightActionClassName}
           onClick={() => handleChangePage("next")}
         >
           <ArrowRight />

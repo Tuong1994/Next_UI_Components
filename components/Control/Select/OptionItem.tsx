@@ -1,6 +1,7 @@
 import React from "react";
 import { Option } from "../type";
 import { HiCheck } from "react-icons/hi2";
+import utils from "@/utils";
 
 interface OptionItemProps {
   option: Option;
@@ -10,11 +11,12 @@ interface OptionItemProps {
 }
 
 const OptionItem: React.FC<OptionItemProps> = ({ option, isSelected, handleSelect, iconSize }) => {
+  const selectedClassName = isSelected(option) ? "list-item-selected" : "";
+
+  const itemClassName = utils.formatClassName("list-item", selectedClassName);
+
   return (
-    <div
-      className={`list-item ${isSelected(option) ? "list-item-selected" : ""}`}
-      onClick={() => handleSelect(option)}
-    >
+    <div className={itemClassName} onClick={() => handleSelect(option)}>
       <div className="item-label">
         {option.icon && <div className="label-icon">{option.icon}</div>}
         <div>{option.label}</div>

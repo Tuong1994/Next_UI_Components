@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlineUpload } from "react-icons/ai";
 import { UploadError } from "../../type";
+import utils from "@/utils";
 
 interface FileUploadControlProps extends React.InputHTMLAttributes<HTMLInputElement> {
   controlClassName?: string;
@@ -32,6 +33,14 @@ const FileUploadControl: React.ForwardRefRenderFunction<HTMLInputElement, FileUp
 
   const disabledClassName = disabled ? "upload-group-disabled" : "";
 
+  const controlInputClassName = utils.formatClassName(
+    "upload-group",
+    dragClassName,
+    errorClassName,
+    disabledClassName,
+    controlClassName
+  );
+
   const renderLabel = () => {
     if (label) return label;
     return (
@@ -45,7 +54,7 @@ const FileUploadControl: React.ForwardRefRenderFunction<HTMLInputElement, FileUp
   return (
     <label
       style={controlStyle}
-      className={`upload-group ${dragClassName} ${errorClassName} ${disabledClassName} ${controlClassName}`}
+      className={controlInputClassName}
       onDragEnter={handleDrag}
       onDragOver={handleDrag}
       onDragLeave={handleDrag}

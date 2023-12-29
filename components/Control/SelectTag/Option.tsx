@@ -4,6 +4,7 @@ import OptionItem from "./OptionItem";
 import OptionPagination from "./OptionPagination";
 import OptionEmpty from "./OptionEmpty";
 import OptionLoading from "./OptionLoading";
+import utils from "@/utils";
 
 export interface SelectTagOptionProps {
   async: boolean;
@@ -37,6 +38,10 @@ const SelectTagOption: React.ForwardRefRenderFunction<HTMLDivElement, SelectTagO
 
   const dropdownClassName = dropdown ? "wrap-option-active" : "";
 
+  const wrapClassName = utils.formatClassName("wrap-option", dropdownClassName);
+
+  const listClassName = utils.formatClassName("option-list", optionScrollClassName);
+
   const isSelected = (option: Option) => selectedOptions.includes(option);
 
   const renderContent = () => {
@@ -54,8 +59,8 @@ const SelectTagOption: React.ForwardRefRenderFunction<HTMLDivElement, SelectTagO
   };
 
   return (
-    <div ref={ref} className={`wrap-option ${dropdownClassName}`}>
-      <div className={`option-list ${optionScrollClassName}`}>{renderContent()}</div>
+    <div ref={ref} className={wrapClassName}>
+      <div className={listClassName}>{renderContent()}</div>
 
       {async && totalPages > 1 && (
         <OptionPagination

@@ -3,6 +3,7 @@
 import React from "react";
 import { ColSpan } from "./type";
 import { GridAppContext, GridRowContext } from "./Context";
+import utils from "@/utils";
 
 export interface GridColProps extends React.HTMLAttributes<HTMLDivElement> {
   rootClassName?: string;
@@ -27,6 +28,8 @@ const GridCol: React.ForwardRefRenderFunction<HTMLDivElement, GridColProps> = (
   const [width, setWidth] = React.useState<string>("auto");
 
   const fillClassName = isFill ? "grid-col-fill" : "";
+
+  const className = utils.formatClassName("grid-col", fillClassName, rootClassName);
 
   const gapSize = !gutters.length ? 10 : gutters[0];
 
@@ -66,12 +69,7 @@ const GridCol: React.ForwardRefRenderFunction<HTMLDivElement, GridColProps> = (
   }, [span, xs, md, lg, isPhone, isTablet, isLaptop, isDesktop]);
 
   return !hide ? (
-    <div
-      ref={ref}
-      style={inlineStyle}
-      {...restProps}
-      className={`grid-col ${fillClassName} ${rootClassName}`}
-    >
+    <div ref={ref} style={inlineStyle} {...restProps} className={className}>
       {children}
     </div>
   ) : null;

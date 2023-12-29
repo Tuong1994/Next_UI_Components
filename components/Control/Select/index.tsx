@@ -9,6 +9,7 @@ import SelectControl from "./Control";
 import FormContext from "../Form/FormContext";
 import FormItemContext from "../Form/FormItemContext";
 import SelectOption from "./Option";
+import utils from "@/utils";
 
 export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rootClassName?: string;
@@ -24,6 +25,7 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   sizes?: ComponentSize;
   color?: ControlColor;
   shape?: ControlShape;
+  hasClear?: boolean;
   async?: boolean;
   loading?: boolean;
   total?: number;
@@ -46,9 +48,11 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
     sizes = "md",
     color = "blue",
     shape = "square",
+    placeholder,
     disabled,
     options = [],
     defaultValue,
+    hasClear = true,
     async = false,
     loading = false,
     total = 0,
@@ -104,6 +108,12 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
     setSelectedOption(defaultOption);
   }, [defaultValue, rhfValue, isRhf]);
 
+  const controlPlaceHolder = React.useMemo(() => {
+    if (placeholder) return placeholder;
+    if (dropdown) return "Search";
+    return "Select option";
+  }, [placeholder, dropdown]);
+
   const controlDisabled = rhfDisabled ? rhfDisabled : disabled;
 
   const controlColor = isRhf ? rhfColor : color;
@@ -112,7 +122,7 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
 
   const controlShape = isRhf ? rhfShape : shape;
 
-  const showClearIcon = Boolean((search || selectedOption) && !controlDisabled);
+  const showClearIcon = Boolean((search || selectedOption) && hasClear && !controlDisabled);
 
   const sizeClassName = `select-${controlSize}`;
 
@@ -125,6 +135,19 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
   const disabledClassName = controlDisabled ? "select-disabled" : "";
 
   const errorClassName = rhfError ? "select-error" : "";
+
+  const mainClassName = utils.formatClassName(
+    "select",
+    colorClassName,
+    sizeClassName,
+    shapeClassName,
+    bottomClassName,
+    errorClassName,
+    rootClassName,
+    disabledClassName
+  );
+
+  const controlLabelClassName = utils.formatClassName("select-label", labelClassName);
 
   const iconSize = () => {
     if (controlSize === "sm") return 14;
@@ -180,13 +203,9 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
   };
 
   return (
-    <div
-      ref={selectRef}
-      style={rootStyle}
-      className={`select ${colorClassName} ${sizeClassName} ${shapeClassName} ${bottomClassName} ${errorClassName} ${rootClassName} ${disabledClassName}`}
-    >
+    <div ref={selectRef} style={rootStyle} className={mainClassName}>
       {label && (
-        <label style={labelStyle} className={`select-label ${labelClassName}`}>
+        <label style={labelStyle} className={controlLabelClassName}>
           {label}
         </label>
       )}
@@ -202,6 +221,7 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
           rhfError={rhfError}
           dropdown={dropdown}
           controlDisabled={controlDisabled}
+          placeholder={controlPlaceHolder}
           showClearIcon={showClearIcon}
           iconSize={iconSize}
           onChange={handleSearch}

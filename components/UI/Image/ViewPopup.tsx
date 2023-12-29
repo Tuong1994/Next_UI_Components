@@ -8,6 +8,7 @@ import {
 import { Draggable } from "..";
 import { useRender, useOverflow } from "@/hooks";
 import Portal from "@/components/Portal";
+import utils from "@/utils";
 
 export interface ImageViewPopupProps {
   open: boolean;
@@ -26,6 +27,8 @@ const ImageViewPopup: React.FC<ImageViewPopupProps> = ({ open, url, onClose }) =
 
   const openClassName = open ? "image-popup-active" : "";
 
+  const className = utils.formatClassName("image-popup", openClassName);
+
   const imageStyle: React.CSSProperties = { transform: `rotate(${rotate}deg) scale(${scale})` };
 
   const handleRotate = () => setRotate((prev) => prev + 90);
@@ -38,7 +41,7 @@ const ImageViewPopup: React.FC<ImageViewPopupProps> = ({ open, url, onClose }) =
   return (
     <Portal>
       {render && (
-        <div className={`image-popup ${openClassName}`}>
+        <div className={className}>
           <div className="popup-head">
             <GlassMinus size={20} onClick={() => handleScale("minus")} />
             <GlassPlus size={20} onClick={() => handleScale("plus")} />

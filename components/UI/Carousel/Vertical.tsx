@@ -4,6 +4,7 @@ import React from "react";
 import { CarouselItems } from "./type";
 import { HiOutlineChevronUp as ArrowUp, HiOutlineChevronDown as ArrowDown } from "react-icons/hi2";
 import useCarousel from "./useCarousel";
+import utils from "@/utils";
 
 export interface CarouselVerticalProps {
   rootClassName?: string;
@@ -13,6 +14,7 @@ export interface CarouselVerticalProps {
   time?: number;
   infinite?: boolean;
   autoPlay?: boolean;
+  hasArrow?: boolean;
   hasManualStop?: boolean;
   upButtonIcon?: React.ReactNode | React.ReactNode[];
   downButtonIcon?: React.ReactNode | React.ReactNode[];
@@ -32,6 +34,7 @@ const CarouselVertical: React.ForwardRefRenderFunction<HTMLDivElement, CarouselV
     time = 3000,
     infinite,
     autoPlay,
+    hasArrow = true,
     hasManualStop,
     upButtonIcon = <ArrowUp size={30} />,
     downButtonIcon = <ArrowDown size={30} />,
@@ -79,6 +82,12 @@ const CarouselVertical: React.ForwardRefRenderFunction<HTMLDivElement, CarouselV
   const prevBtnDisabledClassName = prevBtnDisabled ? "carousel-action-disabled" : "";
 
   const nextBtnDisabledClassName = nextBtnDisabled ? "carousel-action-disabled" : "";
+
+  const mainClassName = utils.formatClassName("carousel", "carousel-vertical", modeClassName, rootClassName);
+
+  const leftActionClassName = utils.formatClassName("carousel-action", prevBtnDisabledClassName);
+
+  const rightActionClassName = utils.formatClassName("carousel-action", nextBtnDisabledClassName);
 
   const jumpToSlide = (pos: number) => {
     setSlidePos(pos);
@@ -189,18 +198,28 @@ const CarouselVertical: React.ForwardRefRenderFunction<HTMLDivElement, CarouselV
   const renderDots = () => {
     return items.map((item, idx) => {
       const dotActiveClassName = slidePos === idx ? "dots-item-active" : "";
-      return <div key={item.id} className={`dots-item ${dotActiveClassName}`} onClick={() => jumpToSlide(idx)} />;
+      return (
+        <div
+          key={item.id}
+          className={utils.formatClassName("dots-item", dotActiveClassName)}
+          onClick={() => jumpToSlide(idx)}
+        />
+      );
     });
   };
 
   return (
-    <div ref={ref} style={style} className={`carousel carousel-vertical ${modeClassName} ${rootClassName}`}>
-      <button disabled={prevBtnDisabled} className={`carousel-action ${prevBtnDisabledClassName}`} onClick={onPrev}>
-        {upButtonIcon}
-      </button>
-      <button disabled={nextBtnDisabled} className={`carousel-action ${nextBtnDisabledClassName}`} onClick={onNext}>
-        {downButtonIcon}
-      </button>
+    <div ref={ref} style={style} className={mainClassName}>
+      {hasArrow && (
+        <button disabled={prevBtnDisabled} className={leftActionClassName} onClick={onPrev}>
+          {upButtonIcon}
+        </button>
+      )}
+      {hasArrow && (
+        <button disabled={nextBtnDisabled} className={rightActionClassName} onClick={onNext}>
+          {downButtonIcon}
+        </button>
+      )}
       <div
         id="carouselView"
         className="carousel-view"

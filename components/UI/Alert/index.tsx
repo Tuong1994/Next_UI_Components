@@ -11,6 +11,7 @@ import { AlertType } from "./type";
 import { ComponentPlacement, Record } from "@/common/type";
 import Portal from "@/components/Portal";
 import useRender from "@/hooks/useRender";
+import utils from "@/utils";
 
 export interface AlertProps {
   rootClassName?: string;
@@ -44,6 +45,14 @@ const Alert: React.ForwardRefRenderFunction<HTMLDivElement, AlertProps> = (
 
   const activeClassName = open ? "alert-active" : "";
 
+  const className = utils.formatClassName(
+    "alert",
+    typeClassName,
+    placementClassName,
+    activeClassName,
+    rootClassName
+  );
+
   React.useEffect(() => {
     timeRef.current = setTimeout(() => onClose?.(), 3000);
     return () => clearTimeout(timeRef.current);
@@ -63,12 +72,7 @@ const Alert: React.ForwardRefRenderFunction<HTMLDivElement, AlertProps> = (
   return (
     <Portal>
       {render && (
-        <div
-          ref={ref}
-          style={style}
-          className={`alert ${typeClassName} ${placementClassName} ${activeClassName} ${rootClassName}`}
-          onClick={onClose}
-        >
+        <div ref={ref} style={style} className={className} onClick={onClose}>
           <div className="alert-icon">{iconType()}</div>
           <p className="alert-message">{message}</p>
         </div>

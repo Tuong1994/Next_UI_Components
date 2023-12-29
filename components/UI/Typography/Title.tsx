@@ -1,5 +1,6 @@
 import React from "react";
 import { TypographyAlign, TypographyVariant } from "./type";
+import utils from "@/utils";
 
 type TitleLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -45,7 +46,16 @@ const Title: React.ForwardRefRenderFunction<HTMLHeadingElement, TitleProps> = (
     ...restProps,
     ref,
     style: { ...style, fontWeight: weight },
-    className: `title title-${level} ${alignClassName} ${removeClassName} ${italicClassName} ${underlineClassName} ${variantClassName} ${rootClassName}`,
+    className: utils.formatClassName(
+      "title",
+      `title-${level}`,
+      alignClassName,
+      removeClassName,
+      italicClassName,
+      underlineClassName,
+      variantClassName,
+      rootClassName
+    ),
   };
 
   return (

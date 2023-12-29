@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSpinner } from "react-icons/fa";
 import { HiOutlineChevronDown, HiXCircle } from "react-icons/hi2";
+import utils from "@/utils";
 
 interface SelectControlProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rhfError: boolean;
@@ -27,7 +28,6 @@ const SelectControl: React.ForwardRefRenderFunction<HTMLInputElement, SelectCont
     controlDisabled,
     showClearIcon,
     inputClassName = "",
-    placeholder = "Select option...",
     iconSize,
     renderValue,
     handleClearInput,
@@ -39,6 +39,8 @@ const SelectControl: React.ForwardRefRenderFunction<HTMLInputElement, SelectCont
   const selectRef = React.useRef<HTMLDivElement>(null);
 
   const iconRotateClassName = dropdown ? "action-icon-rotate" : "";
+
+  const controlInputClassName = utils.formatClassName("control-box", inputClassName);
 
   // Focus input when error is trigger
   React.useEffect(() => {
@@ -53,11 +55,10 @@ const SelectControl: React.ForwardRefRenderFunction<HTMLInputElement, SelectCont
         <input
           ref={ref}
           {...restProps}
-          disabled={controlDisabled}
-          placeholder={placeholder}
-          value={renderValue()}
           type="text"
-          className={`control-box ${inputClassName}`}
+          disabled={controlDisabled}
+          value={renderValue()}
+          className={controlInputClassName}
         />
         {showClearIcon && (
           <div className="control-action" onClick={handleClearInput}>
@@ -65,7 +66,10 @@ const SelectControl: React.ForwardRefRenderFunction<HTMLInputElement, SelectCont
           </div>
         )}
         <div className="control-action">
-          <HiOutlineChevronDown size={iconSize()} className={`action-icon ${iconRotateClassName}`} />
+          <HiOutlineChevronDown
+            size={iconSize()}
+            className={utils.formatClassName("action-icon", iconRotateClassName)}
+          />
         </div>
       </div>
 

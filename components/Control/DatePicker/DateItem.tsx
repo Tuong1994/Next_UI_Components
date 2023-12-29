@@ -1,6 +1,7 @@
 import React from "react";
 import { SelectDate } from "../type";
 import useSelectRange from "./useSelectRange";
+import utils from "@/utils";
 
 interface DateItemProps {
   min?: "today" | string;
@@ -24,8 +25,15 @@ const DateItem: React.FC<DateItemProps> = ({ min, max, currentDate, selectDate, 
 
   const subDateClassName = selectDate.type === "sub" ? "date-item-sub" : "";
 
+  const className = utils.formatClassName(
+    "date-item",
+    selectedClassName,
+    subDateClassName,
+    disabledClassName
+  );
+
   return (
-    <div className={`date-item ${selectedClassName} ${subDateClassName} ${disabledClassName}`}>
+    <div className={className}>
       <button
         disabled={disabled}
         type="button"

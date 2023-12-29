@@ -5,6 +5,7 @@ import { ComponentColor, ComponentSize } from "@/common/type";
 import { ControlShape } from "@/components/Control/type";
 import Spinner from "../Loading/Spinner";
 import FormContext from "@/components/Control/Form/FormContext";
+import utils from "@/utils";
 
 type ButtonColor = Exclude<ComponentColor, "white" | "gray">;
 
@@ -56,15 +57,21 @@ const Button: React.ForwardRefRenderFunction<HTMLButtonElement, ButtonProps> = (
     if (ghost && !buttonColor) return `button-ghost`;
     if (!ghost && buttonColor) return `button-color button-${buttonColor}`;
     if (ghost && buttonColor) return `button-ghost button-ghost-${buttonColor}`;
+    return "";
   };
 
+  const className = utils.formatClassName(
+    "button",
+    sizeClassName,
+    shapeClassName,
+    colorClassName(),
+    loadingClassName,
+    disabledClassName,
+    rootClassName
+  );
+
   return (
-    <button
-      ref={ref}
-      {...restProps}
-      disabled={btnDisabled}
-      className={`button ${sizeClassName} ${shapeClassName} ${colorClassName()} ${loadingClassName} ${disabledClassName} ${rootClassName}`}
-    >
+    <button ref={ref} {...restProps} disabled={btnDisabled} className={className}>
       {loading && <Spinner rootClassName="button-icon" />}
       <span>{children}</span>
     </button>

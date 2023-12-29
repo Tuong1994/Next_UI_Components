@@ -1,6 +1,7 @@
 import React from "react";
 import { Option } from "../type";
 import { HiCheck, HiChevronRight } from "react-icons/hi2";
+import utils from "@/utils";
 
 interface OptionItemProps {
   option: Option;
@@ -16,15 +17,21 @@ const OptionItem: React.FC<OptionItemProps> = ({ option, isSelected, handleSelec
 
   const iconActiveClassName = collapsed ? "arrow-icon-active" : "";
 
+  const selectedClassName = isSelected(option) ? "item-inner-selected" : "";
+
+  const itemClassName = utils.formatClassName("item-inner", selectedClassName);
+
+  const itemChildClassName = utils.formatClassName("item-child", childActiveClassName);
+
   const handleCollapse = () => setCollapsed(!collapsed);
-  
+
   return (
     <div className="list-item">
-      <div className={`item-inner ${isSelected(option) ? "item-inner-selected" : ""}`}>
+      <div className={itemClassName}>
         <div className="inner-title">
           {option.children && (
             <div className="title-arrow" onClick={handleCollapse}>
-              <HiChevronRight className={`arrow-icon ${iconActiveClassName}`} />
+              <HiChevronRight className={utils.formatClassName("arrow-icon", iconActiveClassName)} />
             </div>
           )}
           <div className="title-label" onClick={() => handleSelect(option)}>
@@ -40,7 +47,7 @@ const OptionItem: React.FC<OptionItemProps> = ({ option, isSelected, handleSelec
       </div>
 
       {option.children && (
-        <div className={`item-child ${childActiveClassName}`}>
+        <div className={itemChildClassName}>
           {option.children?.map((child, idx) => (
             <OptionItem
               key={idx}

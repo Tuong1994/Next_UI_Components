@@ -59,7 +59,7 @@ const MultipleImageUpload: React.ForwardRefRenderFunction<HTMLInputElement, Mult
 
   const controlColor = isForm ? rhfColor : color;
 
-  const controlShape = isForm ? rhfShape : shape
+  const controlShape = isForm ? rhfShape : shape;
 
   const shapeClassName = `multiple-image-upload-${controlShape}`;
 
@@ -72,6 +72,21 @@ const MultipleImageUpload: React.ForwardRefRenderFunction<HTMLInputElement, Mult
   const disabledClassName = disabled ? "upload-group-disabled" : "";
 
   const errorClassName = error ? "upload-group-error" : "";
+
+  const mainClassName = utils.formatClassName(
+    "multiple-image-upload",
+    gapClassName,
+    shapeClassName,
+    colorClassName,
+    rootClassName
+  );
+
+  const groupClassName = utils.formatClassName(
+    "upload-group",
+    dragClassName,
+    errorClassName,
+    disabledClassName
+  );
 
   // Set default images
   React.useEffect(() => {
@@ -160,12 +175,9 @@ const MultipleImageUpload: React.ForwardRefRenderFunction<HTMLInputElement, Mult
   };
 
   return (
-    <div
-      style={rootStyle}
-      className={`multiple-image-upload ${gapClassName} ${shapeClassName} ${colorClassName} ${rootClassName}`}
-    >
+    <div style={rootStyle} className={mainClassName}>
       <div
-        className={`upload-group ${dragClassName} ${errorClassName} ${disabledClassName}`}
+        className={groupClassName}
         onDragEnter={handleDrag}
         onDragOver={handleDrag}
         onDragLeave={handleDrag}

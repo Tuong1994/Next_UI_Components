@@ -12,6 +12,7 @@ import { Image } from "..";
 import Portal from "@/components/Portal";
 import useCarousel from "./useCarousel";
 import useRender from "@/hooks/useRender";
+import utils from "@/utils";
 
 export interface CarouselGalleryProps {
   rootClassName?: string;
@@ -108,6 +109,19 @@ const CarouselGallery: React.ForwardRefRenderFunction<HTMLDivElement, CarouselGa
   const nextBtnDisabledClassName = nextBtnDisabled ? "carousel-action-disabled" : "";
 
   const listActiveClassName = showList ? "carousel-gallery-list-active" : "";
+
+  const mainClassName = utils.formatClassName(
+    "carousel",
+    "carousel-gallery",
+    openClassName,
+    listActiveClassName,
+    modeClassName,
+    rootClassName
+  );
+
+  const leftActionClassName = utils.formatClassName("carousel-action", prevBtnDisabledClassName);
+
+  const rightActionClassName = utils.formatClassName("carousel-action", nextBtnDisabledClassName);
 
   const jumpToSlide = (pos: number) => {
     setSlidePos(pos);
@@ -220,7 +234,7 @@ const CarouselGallery: React.ForwardRefRenderFunction<HTMLDivElement, CarouselGa
       const itemActiveClassName = slidePos === idx ? "list-item-active" : "";
       return (
         <Image
-          size="100%"
+          imgWidth="100%"
           key={item.id}
           src={item.url}
           rootClassName={`list-item ${itemActiveClassName}`}
@@ -233,24 +247,12 @@ const CarouselGallery: React.ForwardRefRenderFunction<HTMLDivElement, CarouselGa
   return (
     <Portal>
       {render && (
-        <div
-          ref={ref}
-          style={style}
-          className={`carousel carousel-gallery ${openClassName} ${listActiveClassName} ${modeClassName} ${rootClassName}`}
-        >
+        <div ref={ref} style={style} className={mainClassName}>
           <div className="gallery-view">
-            <button
-              disabled={prevBtnDisabled}
-              className={`carousel-action ${prevBtnDisabledClassName}`}
-              onClick={onPrev}
-            >
+            <button disabled={prevBtnDisabled} className={leftActionClassName} onClick={onPrev}>
               {leftButtonIcon}
             </button>
-            <button
-              disabled={nextBtnDisabled}
-              className={`carousel-action ${nextBtnDisabledClassName}`}
-              onClick={onNext}
-            >
+            <button disabled={nextBtnDisabled} className={rightActionClassName} onClick={onNext}>
               {rightButtonIcon}
             </button>
 

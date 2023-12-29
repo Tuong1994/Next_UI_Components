@@ -7,6 +7,7 @@ import { ControlColor, ControlShape, InputValue } from "../type";
 import { ComponentSize } from "@/common/type";
 import FormContext from "../Form/FormContext";
 import FormItemContext from "../Form/FormItemContext";
+import utils from "@/utils";
 
 export interface InputPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rootClassName?: string;
@@ -37,7 +38,7 @@ const InputPassword: React.ForwardRefRenderFunction<HTMLInputElement, InputPassw
     sizes = "md",
     color = "blue",
     shape = "square",
-    placeholder = "Enter infomation...",
+    placeholder = "Enter information",
     disabled,
     onBlur,
     onChangeInput,
@@ -78,6 +79,20 @@ const InputPassword: React.ForwardRefRenderFunction<HTMLInputElement, InputPassw
 
   const errorClassName = rhfError ? "input-error" : "";
 
+  const mainClassName = utils.formatClassName(
+    "input",
+    colorClassName,
+    sizeClassName,
+    shapeClassName,
+    errorClassName,
+    rootClassName,
+    disabledClassName
+  );
+
+  const controlLabelClassName = utils.formatClassName("input-label", labelClassName);
+
+  const controlInputClassName = utils.formatClassName("control-box", inputClassName);
+
   // Focus input when error is trigger
   React.useEffect(() => {
     if (rhfError) inputRef.current?.click();
@@ -114,13 +129,10 @@ const InputPassword: React.ForwardRefRenderFunction<HTMLInputElement, InputPassw
   const onBlurFn = rhfOnBlur ? rhfOnBlur : onBlur;
 
   return (
-    <div
-      style={rootStyle}
-      className={`input ${colorClassName} ${sizeClassName} ${shapeClassName} ${errorClassName} ${rootClassName} ${disabledClassName}`}
-    >
+    <div style={rootStyle} className={mainClassName}>
       <label>
         {label && (
-          <div style={labelStyle} className={`input-label ${labelClassName}`}>
+          <div style={labelStyle} className={controlLabelClassName}>
             {label}
           </div>
         )}
@@ -136,7 +148,7 @@ const InputPassword: React.ForwardRefRenderFunction<HTMLInputElement, InputPassw
               disabled={controlDisabled}
               placeholder={placeholder}
               type={isPassword ? "password" : "text"}
-              className={`control-box ${inputClassName}`}
+              className={controlInputClassName}
               onChange={onChangeFn}
               onBlur={onBlurFn}
             />

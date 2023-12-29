@@ -4,7 +4,7 @@ import React from "react";
 import { ComponentSize } from "@/common/type";
 import ImageView from "./View";
 import ImageLoading from "./Loading";
-import DefaultImage from "@/assets/default-image.jpg";
+import utils from "@/utils";
 
 type ImageSize = ComponentSize;
 
@@ -31,12 +31,12 @@ const Image: React.ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
   {
     rootClassName = "",
     rootStyle,
+    size,
     imgWidth,
     imgHeight,
-    size,
     objectFit = "fill",
     lazyType = "lazy",
-    src = DefaultImage,
+    src = "/default-image.jpg",
     onCheck,
     ...restProps
   },
@@ -53,6 +53,8 @@ const Image: React.ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
   const elRef = React.useRef<HTMLDivElement>(null);
 
   const fitClassName = `image-${objectFit}`;
+
+  const className = utils.formatClassName("image", fitClassName, rootCheckedClassName, rootClassName);
 
   React.useEffect(() => {
     if (lazyType === "lazy") {
@@ -77,9 +79,9 @@ const Image: React.ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
     if (imgWidth && !imgHeight) return { width: imgWidth, height: "auto" };
     if (imgHeight && !imgWidth) return { width: "auto", height: imgHeight };
     if (imgWidth && imgHeight) {
-      if (typeof imgWidth === "number" && typeof imgHeight === "string") {
-        return { width: `${imgWidth}px`, height: imgHeight };
-      } else return { width: imgWidth, height: `${imgHeight}px` };
+      const width = typeof imgWidth === "string" ? imgWidth : `${imgWidth}px`;
+      const height = typeof imgHeight === "string" ? imgHeight : `${imgHeight}px`;
+      return { width, height };
     }
     return { width: "auto", height: "auto" };
   };
@@ -92,10 +94,7 @@ const Image: React.ForwardRefRenderFunction<HTMLImageElement, ImageProps> = (
   };
 
   return (
-    <div
-      style={{ ...rootStyle, ...imageSize() }}
-      className={`image ${fitClassName} ${rootCheckedClassName} ${rootClassName}`}
-    >
+    <div style={{ ...rootStyle, ...imageSize() }} className={className}>
       {loading && !view ? (
         <ImageLoading ref={elRef} imageSize={imageSize} />
       ) : (

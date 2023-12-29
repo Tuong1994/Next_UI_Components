@@ -9,6 +9,7 @@ import FormContext from "../Form/FormContext";
 import FormItemContext from "../Form/FormItemContext";
 import DatePickerControl from "./Control";
 import DatePickerCalender from "./Calendar";
+import utils from "@/utils";
 
 export interface DatePickerProps {
   rootClassName?: string;
@@ -94,6 +95,19 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
 
   const errorClassName = rhfError ? "datepicker-error" : "";
 
+  const mainClassName = utils.formatClassName(
+    "datepicker",
+    colorClassName,
+    sizeClassName,
+    shapeClassName,
+    bottomClassName,
+    errorClassName,
+    rootClassName,
+    disabledClassName
+  );
+
+  const controlLabelClassName = utils.formatClassName("datepicker-label", labelClassName);
+
   // Trigger validation
   React.useEffect(() => {
     if (!isRhf) return;
@@ -133,13 +147,9 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
   };
 
   return (
-    <div
-      ref={datepickerRef}
-      style={rootStyle}
-      className={`datepicker ${colorClassName} ${sizeClassName} ${shapeClassName} ${bottomClassName} ${errorClassName} ${rootClassName} ${disabledClassName}`}
-    >
+    <div ref={datepickerRef} style={rootStyle} className={mainClassName}>
       {label && (
-        <label style={labelStyle} className={`datepicker-label ${labelClassName}`}>
+        <label style={labelStyle} className={controlLabelClassName}>
           {label}
         </label>
       )}
