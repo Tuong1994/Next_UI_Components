@@ -2,6 +2,15 @@
   .select-label {
     display: block;
     margin-bottom: $m-1 - 0.5;
+    .label-required {
+      margin-right: $m-1 - 0.5;
+      color: $text-red;
+    }
+    .label-optional {
+      margin-left: $m-1 - 0.5;
+      color: $text-gray;
+      font-size: $text-xs;
+    }
   }
   .select-wrap {
     position: relative;

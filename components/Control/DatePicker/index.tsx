@@ -28,6 +28,9 @@ export interface DatePickerProps {
   sizes?: ComponentSize;
   color?: ControlColor;
   shape?: ControlShape;
+  required?: boolean;
+  optional?: boolean;
+  hasReset?: boolean;
   onChangeSelect?: (date: Date) => void;
 }
 
@@ -49,6 +52,9 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
     shape = "square",
     format = "DD/MM/YYYY",
     value = new Date(),
+    required,
+    optional,
+    hasReset = true,
     onChangeSelect,
   },
   ref
@@ -59,7 +65,7 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
 
   const { isRhf, rhfName, rhfError, rhfValue, rhfDisabled } = React.useContext(FormItemContext);
 
-  const [selectedDate, setSelectedDate] = React.useState<Date>(value);
+  const [selectedDate, setSelectedDate] = React.useState<Date>(value instanceof Date ? value : new Date());
 
   const [dropdown, setDropdown] = React.useState<boolean>(false);
 
@@ -81,7 +87,11 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
 
   const controlShape = isRhf ? rhfShape : shape;
 
-  const showResetIcon = Boolean(selectedDate.getDate() !== new Date().getDate() && !controlDisabled);
+  const showResetIcon = Boolean(
+    selectedDate.getDate() !== new Date().getDate() && hasReset && !controlDisabled
+  );
+
+  const showOptional = required ? false : optional;
 
   const sizeClassName = `datepicker-${controlSize}`;
 
@@ -120,7 +130,7 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
 
   // Set default value
   React.useEffect(() => {
-    if (isRhf && rhfValue) setSelectedDate(rhfValue);
+    if (isRhf && rhfValue) setSelectedDate(rhfValue instanceof Date ? rhfValue : new Date());
   }, [isRhf, rhfValue]);
 
   const iconSize = () => {
@@ -150,7 +160,9 @@ const DatePicker: React.ForwardRefRenderFunction<HTMLDivElement, DatePickerProps
     <div ref={datepickerRef} style={rootStyle} className={mainClassName}>
       {label && (
         <label style={labelStyle} className={controlLabelClassName}>
-          {label}
+          {required && <span className="label-required">*</span>}
+          <span>{label}</span>
+          {showOptional && <span className="label-optional">(Optional)</span>}
         </label>
       )}
 

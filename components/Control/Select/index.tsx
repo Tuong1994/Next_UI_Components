@@ -25,11 +25,13 @@ export interface SelectProps extends React.InputHTMLAttributes<HTMLInputElement>
   sizes?: ComponentSize;
   color?: ControlColor;
   shape?: ControlShape;
-  hasClear?: boolean;
-  async?: boolean;
-  loading?: boolean;
   total?: number;
   limit?: number;
+  async?: boolean;
+  loading?: boolean;
+  required?: boolean;
+  optional?: boolean;
+  hasClear?: boolean;
   onChangeSearch?: (text: string) => void;
   onChangeSelect?: (value: string | number | boolean) => void;
   onChangePage?: (page: number) => void;
@@ -52,11 +54,13 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
     disabled,
     options = [],
     defaultValue,
-    hasClear = true,
-    async = false,
-    loading = false,
     total = 0,
     limit = 10,
+    async = false,
+    loading = false,
+    required,
+    optional,
+    hasClear = true,
     onChangeSearch,
     onChangeSelect,
     onChangePage,
@@ -123,6 +127,8 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
   const controlShape = isRhf ? rhfShape : shape;
 
   const showClearIcon = Boolean((search || selectedOption) && hasClear && !controlDisabled);
+
+  const showOptional = required ? false : optional;
 
   const sizeClassName = `select-${controlSize}`;
 
@@ -206,7 +212,9 @@ const Select: React.ForwardRefRenderFunction<HTMLInputElement, SelectProps> = (
     <div ref={selectRef} style={rootStyle} className={mainClassName}>
       {label && (
         <label style={labelStyle} className={controlLabelClassName}>
-          {label}
+          {required && <span className="label-required">*</span>}
+          <span>{label}</span>
+          {showOptional && <span className="label-optional">(Optional)</span>}
         </label>
       )}
 

@@ -19,6 +19,8 @@ export interface CheckBoxProps extends React.InputHTMLAttributes<HTMLInputElemen
   label?: React.ReactNode | React.ReactNode[];
   sizes?: ComponentSize;
   color?: Exclude<ComponentColor, "gray">;
+  required?: boolean;
+  optional?: boolean;
   onCheck?: (checked: boolean) => void;
   onCheckInput?: (value: InputValue) => void;
 }
@@ -37,6 +39,8 @@ const CheckBox: React.ForwardRefRenderFunction<HTMLInputElement, CheckBoxProps> 
     checked = false,
     disabled,
     value,
+    required,
+    optional,
     onCheck,
     onCheckInput,
     ...restProps
@@ -56,6 +60,8 @@ const CheckBox: React.ForwardRefRenderFunction<HTMLInputElement, CheckBoxProps> 
   const controlColor = isRhf ? rhfColor : color;
 
   const controlSize = isRhf ? rhfSizes : sizes;
+
+  const showOptional = required ? false : optional;
 
   const gapClassName = !isRhf ? "checkbox-gap" : "";
 
@@ -151,7 +157,9 @@ const CheckBox: React.ForwardRefRenderFunction<HTMLInputElement, CheckBoxProps> 
 
         {label && (
           <div style={labelStyle} className={controlLabelClassName}>
-            {label}
+            {required && <span className="label-required">*</span>}
+            <span>{label}</span>
+            {showOptional && <span className="label-optional">(Optional)</span>}
           </div>
         )}
       </label>

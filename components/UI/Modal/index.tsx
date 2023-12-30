@@ -64,6 +64,10 @@ const Modal: React.ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (
 
   const render = useRender(open);
 
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  const modalBackdropRef = React.useRef<HTMLDivElement>(null);
+
   const sizeClassName = `modal-${sizes}`;
 
   const colorClassName = `modal-${color}`;
@@ -92,13 +96,30 @@ const Modal: React.ForwardRefRenderFunction<HTMLDivElement, ModalProps> = (
 
   const okActionProps: ButtonProps = { ...okButtonProps, color: okButtonColor };
 
+  React.useImperativeHandle(ref, () => modalRef.current as HTMLDivElement);
+
+  React.useEffect(() => {
+    if (!document) return;
+    const modals = document.querySelectorAll(".modal-active");
+    if (modalRef.current !== null && modalBackdropRef.current !== null) {
+      const modalzIndex = 35 + modals.length;
+      const backdropszIndex = 34 + modals.length;
+      modalRef.current.style.zIndex = `${modalzIndex}`;
+      modalBackdropRef.current.style.zIndex = `${backdropszIndex}`;
+    }
+  });
+
   return (
     <Portal>
       {render && (
         <React.Fragment>
-          <div className={backdropClassName} onClick={() => backdropClose && onCancel?.()} />
+          <div
+            ref={modalBackdropRef}
+            className={backdropClassName}
+            onClick={() => backdropClose && onCancel?.()}
+          />
 
-          <div ref={ref} style={style} className={mainClassName}>
+          <div ref={modalRef} style={style} className={mainClassName}>
             {hasHead && (
               <div style={headStyle} className={modalHeadClassName}>
                 {head}

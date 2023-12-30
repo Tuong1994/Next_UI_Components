@@ -17,8 +17,8 @@
           th {
             min-width: max-content;
             .table-cell {
-              font-size: $text-sm;
               padding: $p-1 - 0.4 $p-1;
+              font-size: $text-sm;
               .cell-checked-mixed {
                 width: $w-2;
                 height: $h-2;
@@ -247,5 +247,86 @@
   }
   .table-row-selected {
     background: $bg-pink-rgba-xs !important;
+  }
+}
+
+// Expand color
+.table-row-expand {
+  .table-blue {
+    .table-content {
+      thead {
+        tr {
+          background: $bg-blue !important;
+        }
+      }
+    }
+    .table-row-selected {
+      background: $bg-blue-rgba-xs !important;
+    }
+  }
+
+  .table-green {
+    .table-content {
+      thead {
+        tr {
+          background: $bg-green !important;
+        }
+      }
+    }
+    .table-row-selected {
+      background: $bg-green-rgba-xs !important;
+    }
+  }
+
+  .table-orange {
+    .table-content {
+      thead {
+        tr {
+          background: $bg-orange !important;
+        }
+      }
+    }
+    .table-row-selected {
+      background: $bg-orange-rgba-xs !important;
+    }
+  }
+
+  .table-yellow {
+    .table-content {
+      thead {
+        tr {
+          background: $bg-yellow !important;
+        }
+      }
+    }
+    .table-row-selected {
+      background: $bg-yellow-rgba-xs !important;
+    }
+  }
+
+  .table-purple {
+    .table-content {
+      thead {
+        tr {
+          background: $bg-purple !important;
+        }
+      }
+    }
+    .table-row-selected {
+      background: $bg-purple-rgba-xs !important;
+    }
+  }
+
+  .table-pink {
+    .table-content {
+      thead {
+        tr {
+          background: $bg-pink !important;
+        }
+      }
+    }
+    .table-row-selected {
+      background: $bg-pink-rgba-xs !important;
+    }
   }
 }

@@ -1,31 +1,45 @@
 import React from "react";
-import { UI } from "@/components";
-import { SpaceProps } from "@/components/UI/Space";
-import { ParagraphProps } from "@/components/UI/Typography/Paragraph";
+import type { ParagraphProps } from "@/components/UI/Typography/Paragraph";
+import type { GridColProps } from "../Grid/Col";
+import type { GridRowProps } from "../Grid/Row";
+import { Grid, Typography } from "..";
 
-const { Space, Typography } = UI;
+const { Row, Col } = Grid;
 
 const { Paragraph } = Typography;
 
-export interface InfoRowProps extends SpaceProps {
+export interface InfoRowProps extends GridRowProps {
   label?: React.ReactNode;
   text?: React.ReactNode;
   labelProps?: ParagraphProps;
   textProps?: ParagraphProps;
+  labelSpanProps?: GridColProps;
+  textSpanProps?: GridColProps;
+  hasColon?: boolean;
 }
 
 const InfoRow: React.ForwardRefRenderFunction<HTMLDivElement, InfoRowProps> = (
-  { label, text, size = "md", labelProps, textProps, ...restProps },
+  { label, text, labelProps, textProps, labelSpanProps, textSpanProps, hasColon = true, ...restProps },
   ref
 ) => {
-  const labelDefaultProps: ParagraphProps = { ...labelProps, rootClassName: "row-label" };
+  const labelSpanDefaultProps: GridColProps = { span: 6, ...labelSpanProps };
 
-  const textDefaultProps: ParagraphProps = { ...textProps, strong: true };
+  const textSpanDefaultProps: GridColProps = { span: 16, ...textSpanProps };
+
+  const labelDefaultProps: ParagraphProps = { rootClassName: "row-label", ...labelProps };
+
+  const textDefaultProps: ParagraphProps = { strong: true, ...textProps };
   return (
-    <Space ref={ref} size={size} rootClassName="info-row" {...restProps}>
-      <Paragraph {...labelDefaultProps}>{label} :</Paragraph>
-      <Paragraph {...textDefaultProps}>{text}</Paragraph>
-    </Space>
+    <Row ref={ref} rootClassName="info-row" {...restProps}>
+      <Col {...labelSpanDefaultProps}>
+        <Paragraph {...labelDefaultProps}>
+          {label} {hasColon ? ":" : ""}
+        </Paragraph>
+      </Col>
+      <Col {...textSpanDefaultProps}>
+        <Paragraph {...textDefaultProps}>{text}</Paragraph>
+      </Col>
+    </Row>
   );
 };
 
