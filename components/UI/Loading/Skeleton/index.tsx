@@ -27,7 +27,7 @@ const Skeleton: React.ForwardRefRenderFunction<HTMLDivElement, SkeletonProps> = 
 ) => {
   const commonProps = { ref, ...restProps };
 
-  const shapeClassName = `skeleton-${options?.shape ?? "round"}`;
+  const shapeClassName = `skeleton-${options?.shape ?? "square"}`;
 
   const className = utils.formatClassName("skeleton", shapeClassName, rootClassName);
 
