@@ -1,3 +1,4 @@
 import Spinner from "./Spinner";
+import Skeleton from "./Skeleton";
 
-export { Spinner };
+export { Spinner, Skeleton };

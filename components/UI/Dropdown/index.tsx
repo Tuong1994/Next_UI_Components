@@ -3,8 +3,7 @@
 import React from "react";
 import { DropdownItems } from "./type";
 import { ComponentPlacement } from "@/common/type";
-import useRender from "@/hooks/useRender";
-import useClickOutside from "@/hooks/useClickOutside";
+import { useRender, useClickOutside } from "@/hooks";
 import utils from "@/utils";
 
 type TriggerType = "click" | "hover";

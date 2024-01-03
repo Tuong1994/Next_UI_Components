@@ -1,8 +1,7 @@
 import React from "react";
 import { Option, SelectOptions } from "../type";
 import { HiOutlineChevronDown as ArrowDown } from "react-icons/hi2";
-import useRender from "@/hooks/useRender";
-import useClickOutside from "@/hooks/useClickOutside";
+import { useRender, useClickOutside } from "@/hooks";
 import utils from "@/utils";
 
 interface HeaderSelectProps {

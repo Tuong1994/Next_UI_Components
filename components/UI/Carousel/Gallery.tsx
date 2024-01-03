@@ -9,9 +9,9 @@ import {
   HiListBullet as IconList,
 } from "react-icons/hi2";
 import { Image } from "..";
+import { useRender } from "@/hooks";
 import Portal from "@/components/Portal";
 import useCarousel from "./useCarousel";
-import useRender from "@/hooks/useRender";
 import utils from "@/utils";
 
 export interface CarouselGalleryProps {

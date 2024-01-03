@@ -1,7 +1,3 @@
-export type Record = {
-  [x: string]: any;
-};
-
 export type ComponentShape = "square" | "circle" | "round";
 
 export type ComponentSize = "sm" | "md" | "lg";
