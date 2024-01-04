@@ -2,20 +2,26 @@
   width: $w-10 * 2.5;
   height: $h-screen;
   border-right: 0.5px solid transparent;
-  position: relative;
+  position: fixed;
   z-index: 10;
-  transition: all $transition-time-md $transition-fn;
+  transition: all $transition-time-sm $transition-fn;
   .side-content {
-    height: calc($h-full - $h-6);
+    height: $h-full;
+    padding: $p-2 0;
     overflow-y: auto;
     overflow-x: hidden;
   }
   .side-action {
+    width: $w-10 * 2.5;
     height: $h-6;
     padding: $p-1;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    transition: all $transition-time-sm $transition-fn;
     .action-btn {
       width: $w-full;
       svg {
@@ -25,24 +31,44 @@
       }
     }
   }
+  @include respond(mdTablet) {
+    left: -100%;
+    z-index: 20;
+  }
 }
 
+.side-collapsable {
+  .side-content {
+    height: calc($h-full - $h-6);
+  }
+}
+
+// Shrinked
 .side-shrinked {
   width: $w-6;
   .side-content {
     overflow: unset;
   }
+  .side-action {
+    width: $w-6;
+  }
 }
 
+// layout
 .side-layout {
-  height: calc($h-screen - $h-6);
-  position: fixed;
-  top: 60px;
+  padding-top: $p-1 * 6;
+  @include respond(mdTablet) {
+    padding: $p-1 0;
+  }
 }
 
+// Theme
 .side-light {
   background: $bg-white;
   border-color: $bg-gray;
+  .side-action {
+    background: $bg-white;
+  }
 }
 
 .side-dark {
@@ -52,4 +78,67 @@
   * {
     color: $text-white;
   }
+  .side-action {
+    background: $bg-deep-blue;
+  }
+}
+
+// Mobile
+.side-show {
+  @include respond(mdTablet) {
+    left: 0;
+  }
+}
+
+.side-mobile-btn {
+  width: $w-4;
+  height: $h-4;
+  border: transparent;
+  background: $bg-deep-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: $rounded;
+  border-bottom-right-radius: $rounded;
+  position: fixed;
+  top: 1rem;
+  left: 0;
+  z-index: 15;
+  transition: all $transition-time-md $transition-fn;
+  * {
+    color: $text-white;
+  }
+}
+.side-mobile-btn-top {
+  top: 7rem;
+}
+
+// Mobile backdrop
+.side-mobile-backdrop {
+  background: $bg-black-rgba-md;
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 19;
+  transition: all $transition-time-sm $transition-fn;
+  .backdrop-close-btn {
+    border: unset;
+    background: transparent;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    * {
+      color: $text-white;
+    }
+  }
+}
+
+.side-mobile-backdrop-active {
+  opacity: 1;
+  visibility: visible;
+  animation: fade $transition-time-sm $transition-fn;
 }
